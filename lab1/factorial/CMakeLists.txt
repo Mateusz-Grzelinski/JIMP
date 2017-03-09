@@ -9,3 +9,4 @@ target_include_directories(libfactorial PUBLIC .)
 add_executable(factorial ${SOURCE_FILES} main.cpp)
 
 target_link_libraries(factorial libfactorial)
+
