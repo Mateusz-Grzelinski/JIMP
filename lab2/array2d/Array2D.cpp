@@ -15,8 +15,8 @@ int **Array2D(int n_rows, int n_columns){
 
 void FillIn(int **array, int n_rows, int n_columns) {
     int iterator=1;
-    for(int i=0; i<n_columns; i++)
-        for( int j=0; j<n_rows; j++) {
+    for(int i=0; i<n_rows; i++)
+        for( int j=0; j<n_columns; j++) {
 //            *((*array + i) + j) = iterator; //cos tu jest źle
             array[i][j]=iterator; //to działa
             iterator++;
