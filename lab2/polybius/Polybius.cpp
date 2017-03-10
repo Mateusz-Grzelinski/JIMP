@@ -25,10 +25,11 @@ string EncryptStringToIndex(char letter){ // zamienia pojedyńczą literę na ko
 
 string PolybiusCrypt(std::string message){
     string resultEncrypted;
+    string key="ABCDEFGHIJKLMNOPRSTUVWQXYZ";
     //konwertuj wszystko na duże litery
     std::transform(message.begin(), message.end(), message.begin(), ::toupper);
     for(int i=0; i<message.size(); i++) {
-        if (message[i]!=' ')
+        if (key.find(message[i])!=string::npos)
             resultEncrypted.append(EncryptStringToIndex(message[i]) );
     }
     return resultEncrypted;
@@ -42,13 +43,16 @@ char DecryptIndexToString(char index_x, char index_y) {
             {'Q', 'R', 'S', 'T', 'U'},
             {'V', 'W', 'X', 'Y', 'Z'}    }; //litery j nie mozna odkodowac, pozostaje ona i
 //    cout<<key[toDigit(index_x)][toDigit(index_y)]<<endl;
+
     return key[toDigit(index_x)][toDigit(index_y)]; //potrzebne makro do kowersji, bo (int)'2'=33, 32-'0'=3
 }
 
 string PolybiusDecrypt(std::string crypted){
     string resultDecrypted;
+    string key="ABCDEFGHIJKLMNOPRSTUVWQXYZ";
     for (int i=0; i<crypted.size(); i+=2) //pobierz 2 cyfry i rokoduj, jaka to litera
-        resultDecrypted+= DecryptIndexToString(crypted[i], crypted[i + 1]) ;
+        if (key.find(crypted[i])!=string::npos && key.find(crypted[i+1])!=string::npos)
+            resultDecrypted+= DecryptIndexToString(crypted[i], crypted[i + 1]) ;
     //resultDecrypted.append( DecryptIndexToString(crypted[i], crypted[i + 1]) );// dlaczego append nie działa?
     return resultDecrypted;
 }

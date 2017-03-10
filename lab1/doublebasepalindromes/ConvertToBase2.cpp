@@ -3,12 +3,12 @@
 //
 
 #include "ConvertToBase2.h"
-std::string reverse(std::string str){
+std::string Reverse(std::string str){
     if (str.length()==0 || str.length()==1) return str;
     else {
         std::string reversed_characters; //odwrócony str
         std::string last_char(1, str[str.length()-1]); //string przechowujący ostatni znak str
-        reversed_characters = last_char + reverse( str.substr(0,str.length()-1) );
+        reversed_characters = last_char + Reverse(str.substr(0, str.length() - 1));
         return std::string(reversed_characters);
 
     }
@@ -20,6 +20,6 @@ std::string ConvertToBase2(long int value){
         BaseTwoString.append( std::to_string(value%2) );
         value=value/2;
     }
-    return reverse(BaseTwoString);
+    return Reverse(BaseTwoString);
 }
 

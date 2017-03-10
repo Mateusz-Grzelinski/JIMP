@@ -10,6 +10,6 @@ int main(){
 
     std::cout<<"suma podwójnych plaindromów: "<<DoubleBasePalindromes(1000000) <<std::endl;
 
-    //std::cout<< "liczba w systemie 2: 4 to "<< is_palindrome(ConvertToBase2(3)); //3 w systemie dwójkowym to 11- czyli palindrom
+    //std::cout<< "liczba w systemie 2: 4 to "<< isPalindrome(ConvertToBase2(3)); //3 w systemie dwójkowym to 11- czyli palindrom
     return 0;
 }

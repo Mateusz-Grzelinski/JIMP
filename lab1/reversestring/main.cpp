@@ -2,7 +2,7 @@
 // Created by mat on 04.03.17.
 //
 #include <iostream>
-#include "reverse.h"
+#include "ReverseString.h"
 
 int main (void){
     std::string napis;

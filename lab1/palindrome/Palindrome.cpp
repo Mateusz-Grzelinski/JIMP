@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-bool is_palindrome(std::string str){
+bool isPalindrome(std::string str){
     if (str.length()==1) return true;
     int i,j;
     for (i=0, j=str.length()-1; i<j; i++, j--)

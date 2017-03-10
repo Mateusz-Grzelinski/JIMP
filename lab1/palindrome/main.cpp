@@ -14,7 +14,7 @@ int main(){
         if (rozkaz==2) break;
         if (rozkaz==1) {
             std::cin >> tekst;
-            std::cout<<is_palindrome(tekst)<<std::endl;
+            std::cout<< isPalindrome(tekst)<<std::endl;
         }
     }
     return 0;

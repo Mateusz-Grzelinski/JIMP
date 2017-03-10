@@ -1,7 +1,7 @@
 project(reversestring)
 
-set(HEDEAR_FILES reverse.h)
-set(SOURCE_FILES reverse.cpp)
+set(HEDEAR_FILES ReverseString.h)
+set(SOURCE_FILES ReverseString.cpp)
 
 add_library(libreversestring STATIC ${SOURCE_FILES})
 target_include_directories(libreversestring PUBLIC .)

@@ -7,6 +7,6 @@
 #include <string>
 #include <iostream>
 std::string ConvertToBase2(long int  value);
-std::string reverse(std::string str);
+std::string Reverse(std::string str);
 
 #endif //JIMP_EXERCISES_CONVERTTOBASE2_H

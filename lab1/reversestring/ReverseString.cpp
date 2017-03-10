@@ -1,7 +1,7 @@
 //
 // Created by mat on 04.03.17.
 //
-#include <reverse.h>
+#include <ReverseString.h>
 
 std::string reverse(std::string str){
     if (str.length()==0 || str.length()==1) return str;

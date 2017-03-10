@@ -12,13 +12,13 @@ int main(int argc, char* argv[]){
     cout<<"podaj wymiary tablicy x, y:"<<endl;
     cin >> array_x >> array_y;
     int **DynamicArray;
-    DynamicArray=Array2D(array_x,array_y);
+    DynamicArray= NewArray2D(array_x, array_y);
     for(int i=0; i<array_x; i++) {
         for (int j = 0; j < array_y; j++) {
             cout << DynamicArray[i][j] << "\t";
         }
         cout << endl;
     }
-    DeleteArray2D(DynamicArray, array_x, array_y);
+    DeleteArray2D(DynamicArray, array_x);
     return 0;
 }

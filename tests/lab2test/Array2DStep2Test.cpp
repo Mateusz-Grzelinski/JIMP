@@ -17,11 +17,11 @@ TEST_F(Array2DStep2Tests, Define_DeleteArray2D_Function) {
       {{1},
        {2},
        {3}};
-  int **output = Array2D(k_rows, k_cols);
+  int **output = NewArray2D(k_rows, k_cols);
   for (int x = 0; x < k_rows; ++x) {
     for (int y = 0; y < k_cols; ++y) {
       EXPECT_EQ(expected[x][y], output[x][y]) << "element (" << x << ", " << y << ")\n";
     }
   }
-  DeleteArray2D(output, k_rows, k_cols);
+    DeleteArray2D(output, k_rows);
 }
