@@ -37,11 +37,11 @@ string PolybiusCrypt(std::string message){
 
 char DecryptIndexToString(char index_x, char index_y) {
     char key[5][5]={
-            {'A', 'B', 'C', 'D', 'E'},
-            {'F', 'G', 'H', 'I', 'K'},
-            {'L', 'M', 'N', 'O', 'P'},
-            {'Q', 'R', 'S', 'T', 'U'},
-            {'V', 'W', 'X', 'Y', 'Z'}    }; //litery j nie mozna odkodowac, pozostaje ona i
+            {'a', 'b', 'c', 'd', 'e'},
+            {'f', 'g', 'h', 'i', 'k'},
+            {'l', 'm', 'n', 'o', 'p'},
+            {'q', 'r', 's', 't', 'u'},
+            {'v', 'w', 'x', 'y', 'z'}    }; //litery j nie mozna odkodowac, pozostaje ona i
 //    cout<<key[toDigit(index_x)][toDigit(index_y)]<<endl;
 
     return key[toDigit(index_x)][toDigit(index_y)]; //potrzebne makro do kowersji, bo (int)'2'=33, 32-'0'=3
@@ -49,7 +49,7 @@ char DecryptIndexToString(char index_x, char index_y) {
 
 string PolybiusDecrypt(std::string crypted){
     string resultDecrypted;
-    string key="ABCDEFGHIJKLMNOPRSTUVWQXYZ";
+    string key="0123456789";
     for (int i=0; i<crypted.size(); i+=2) //pobierz 2 cyfry i rokoduj, jaka to litera
         if (key.find(crypted[i])!=string::npos && key.find(crypted[i+1])!=string::npos)
             resultDecrypted+= DecryptIndexToString(crypted[i], crypted[i + 1]) ;
