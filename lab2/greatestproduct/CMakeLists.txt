@@ -1,5 +1,4 @@
-
-project(greatestproduct)
+project(greatestproduct C )
 
 set(HEDEAR_FILES GreatestProduct.h)
 set(SOURCE_FILES GreatestProduct.cpp)

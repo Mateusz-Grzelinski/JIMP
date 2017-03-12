@@ -30,8 +30,6 @@ void Append(ForwardList *list, ForwardList *tail){
             iterator = iterator->next;
         iterator->next = tail;
     }
-
-
 }
 
 void DestroyList(ForwardList *list){
