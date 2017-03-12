@@ -7,7 +7,8 @@
 #include <vector>
 int GreatestProduct(const std::vector<int> &numbers, int k);
 void PrintVector(const std::vector<int> numbers);
-void InsertWithSort(std::vector<int> &biggestElement, const int v, const int k);
+void insertElementKeepMax(std::vector<int> &elements, const int insertValue, const int k);
+void insertElementKeepMin(std::vector<int> &elements, const int insertValue, const int k);
 
 
 
