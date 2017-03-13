@@ -23,11 +23,10 @@ int GreatestProduct(const std::vector<int> &numbers, int k){
 
     if (numbers.size()>=k) {
         //przypadek specjalny, gdy wynik MUSI być negatywny
-        if ( (k%2) && plusNumber==0 ){ //liczba nieparzysta, liczb dodatnich za mało, liczby negatywne nie są puste- automatycznie spełnione(tam może być też zero!!)
-            //wybierz k najmniejszych liczb
+        if ( (k%2) && plusNumber==0 ){  //wybierz k najmniejszych liczb
                 for (int insertValue : numbers) {
                     if (insertValue > 0) {
-                        cout<<"positive: "; PrintVector(positiveList);
+//                        cout<<"positive: "; PrintVector(positiveList);
                         if (positiveList.size() == 0)
                             positiveList.push_back(insertValue);
                         else
@@ -41,8 +40,7 @@ int GreatestProduct(const std::vector<int> &numbers, int k){
         }else {
             for (int insertValue : numbers) {
                 if (insertValue > 0) {
-                    cout << "positive: ";
-                    PrintVector(positiveList);
+//                    cout << "positive: "; PrintVector(positiveList);
                     if (positiveList.size() == 0)
                         positiveList.push_back(insertValue);
                     else
@@ -55,8 +53,8 @@ int GreatestProduct(const std::vector<int> &numbers, int k){
         }
     } else return 0; //kiedy k jest za duże
 
-    cout<<"negative(F): "; PrintVector(negativeList);
-    cout<<"positive(F): "; PrintVector(positiveList);
+//    cout<<"negative(F): "; PrintVector(negativeList);
+//    cout<<"positive(F): "; PrintVector(positiveList);
     int p = positiveList.size(), n = negativeList.size(), negative=0, positive=0;
 
 
