@@ -3,54 +3,51 @@
 //
 
 #include "XorCypherBreaker.h"
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <iostream>
-void PrintVector(const vector<int> numbers);
+//#include <string>
+//#include <vector>
+//#include <algorithm>
+
 
 using namespace std;
 
 std::string XorCypherBreaker(const std::vector<char> &cryptogram,int key_length,
                              const std::vector<string> &dictionary){
-    string keyInstace;//="aaa";
+    string keyInstace;
+    string stopInstance;
     string newGuess;
-    string keyWhenMaxFound;
-    int maxFound=0;
+    string keyWhenMaxWordFound;
+    int maxFoundWords=0;
     int foundWords=0;
-    for (int i=0; i<key_length; ++i)
-        keyInstace.push_back('a');      //zacznij od klucza 'aaa'
+    for (int i=0; i<key_length; ++i) {
+        keyInstace.push_back('a');     //zacznij od klucza 'aaa'
+        stopInstance.push_back('z');    //zakończ przy kluczu 'zzz'
+    }
     //pętla główna (rozkodowująca)
-    while(keyInstace!="zzz"){
+    while(keyInstace!=stopInstance) {
         newGuess.clear();
         GenerateNewSetOfCode(cryptogram, key_length, keyInstace, newGuess);
         foundWords = CheckWithDictionary(dictionary, newGuess);
-//        cout<<"trafień: "<< foundWords<<" "<<"klucz "<<keyInstace<<endl;
 
-
-        if (foundWords> maxFound) {
-            keyWhenMaxFound = keyInstace;
-            maxFound = foundWords;
+        if (foundWords> maxFoundWords) { //zapisz, przy którym kluczy jest najwięcej trafień
+            keyWhenMaxWordFound = keyInstace;
+            maxFoundWords = foundWords;
         }
-        GenerateKey(keyInstace, 0);
+        GenerateKey(keyInstace, 0); //wygeneruj kolejny klucz
     }
-    return keyWhenMaxFound;
+
+    return keyWhenMaxWordFound;
 }
 
-int CheckWithDictionary(const vector<string> &dictionary, string newGuess) {
+int CheckWithDictionary(const vector<string> &dictionary, string newGuess) { //zwraca ile słów pokrywa się ze słownikiem
     int i=0;
-//    cout<<"dic "<<dictionary.size()<<endl;
-
     for( auto word : dictionary) {
         if (newGuess.find(word)!= string::npos) i++;
     }
-//    cout<<endl<<newGuess<<endl;
-
     return i;
 }
 
 void GenerateNewSetOfCode(const vector<char> &cryptogram, const int key_length, string &keyIndexes,
-                          string &newGuess) {
+                          string &newGuess) { //generuje nowe tłumaczenie za pomocą podanego klucza
     long i=0;
     for (auto indexCrypted : cryptogram) { //wypróbuj jeden klucz
             newGuess.push_back( (char)(indexCrypted ^ (int)keyIndexes[i % key_length]) );
@@ -58,7 +55,7 @@ void GenerateNewSetOfCode(const vector<char> &cryptogram, const int key_length, 
         }
 }
 
-void GenerateKey(string &keyIndexes, int i = 0) {
+void GenerateKey(string &keyIndexes, int i = 0) { //generuje nowy klucz, litery a-z
     if (keyIndexes[i]=='z') {
         keyIndexes[i] = 'a';
         if ( i+1<=keyIndexes.size() )
@@ -71,8 +68,3 @@ void GenerateKey(string &keyIndexes, int i = 0) {
 }
 
 
-void PrintVector(const vector<char> numbers){
-    for(auto v : numbers)
-        cout<< v << " ";
-    cout<<endl;
-}
