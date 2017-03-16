@@ -1,9 +1,13 @@
 //
 // Created by mat on 15.03.17.
 //
+#include <iostream>
+#include <utility>
+#include <string>
+#include <array>
+#include <memory>
 
 #include "MinimalTimeDifference.h"
-#include <iostream>
 
 #define MINUTESINDAY 1440 //mity w ciągu dnia
 
@@ -21,11 +25,9 @@ unsigned int minimaltimedifference::ToMinutes(std::string time_HH_MM) {
 
     }
     else{
-        std::cout<<std::endl<<"brak patterna";
         //zle dane, niedopasowane do regex
         return 0;
     }
-//    std::cout<<std::endl<<" "<<hours*60+minutes<<"hours "<<hours<<"minutes "<<minutes;
     return hours*60+minutes;
 }
 
@@ -37,7 +39,6 @@ unsigned int minimaltimedifference::MinimalTimeDifference(std::vector<std::strin
         timesInMinutes.push_back(ToMinutes(singleTime));
         if(minimalDiff > FindDiff(timesInMinutes))
             minimalDiff=FindDiff(timesInMinutes);
-//        std::cout<<std::endl<<"min "<<minimalDiff;
     }
     return minimalDiff;
 }
