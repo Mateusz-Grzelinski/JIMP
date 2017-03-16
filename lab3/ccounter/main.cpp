@@ -6,8 +6,9 @@
 #include "CCounter.h"
 
 using namespace std;
+
 int main(){
-    std::unique_ptr<Counter> nowyObiekt = ccounter::Init();
+    std::unique_ptr<ccounter::Counter> nowyObiekt = ccounter::Init();
 //    cout<<nowyObiekt;
     return 0;
 }

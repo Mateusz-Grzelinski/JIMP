@@ -9,7 +9,9 @@
 #include <map>
 
 namespace ccounter {
-    struct Counter;
+    struct Counter {
+        std::map<std::string, int> countStoI;
+    };
 
     std::unique_ptr<Counter> Init();
 
