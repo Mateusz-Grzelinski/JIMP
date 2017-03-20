@@ -35,7 +35,7 @@ void tinyurl::Gen(std::array<char, 6> &state, int index) {
         state[index]++;
 }
 
-void tinyurl::NextHash(std::array<char, 6> *state) {     //nie wiem czy mogę zmienić tą funkcję więc piszę drugą
+void tinyurl::NextHash(std::array<char, 6> *state) {
 //    tinyurl::Gen(*ref, 0);       //funkcja rekurencyjna, dobry algorytm, ale nie tego chcą testy...
     auto &ref=*state;
     int i=ref.size()-1; //5
