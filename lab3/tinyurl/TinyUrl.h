@@ -10,13 +10,14 @@
 #include <array>
 #include <memory>
 #include <vector>
+#include <map>
 #include<iostream>
 
 namespace tinyurl {
 
     struct TinyUrlCodec {
         std::array<char, 6> keyArray;
-
+        std::map<std::string, std::string> urlMap;
     };
 
     void NextHash(std::array<char, 6> *ref);
@@ -28,8 +29,6 @@ namespace tinyurl {
     std::string Encode(const std::string &url, std::unique_ptr<TinyUrlCodec> *codec);
 
     std::string Decode(const std::unique_ptr<TinyUrlCodec> &codec, const std::string &hash);
-
-    std::unique_ptr<int> NToTen(const std::string &basic_string);
 
 }
 

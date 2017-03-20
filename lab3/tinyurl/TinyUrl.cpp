@@ -7,6 +7,7 @@
 #include <array>
 #include <memory>
 #include <vector>
+#include <map>
 #include "TinyUrl.h"
 
 using namespace tinyurl;
@@ -56,47 +57,23 @@ void tinyurl::NextHash(std::array<char, 6> *state) {     //nie wiem czy mogę zm
     }
 }
 
-/* Algorytm: zamień string na ciąf int'ów zapsanych w dalej w liście stringów(albo intów)
- * np: "aa"->{"97", "97"}
- * weź pary liczb,
- * wykonaj Xor z kluczem
- * zamień na system o dużej podstawie
- * po drodze zapisz gdzieś ten klucz aby potem odkodować*/
 
-std::string tinyurl::Encode(const std::string &url, std::unique_ptr<TinyUrlCodec> *codec) {
-    //zakodój Xor-em
-    std::string encoded;
-    long i=0;
-    for (auto index : url) { //podaje litery po kolei
-        encoded+=std::to_string( (int)index ^ (int)(*codec)->keyArray[i % (*codec)->keyArray.size()] ); //zakodowane inty do stringa
-        i++;
-    }
 
-    TenToN(encoded);
-
-    NextHash(&(*codec)->keyArray); //nowy kod
+std::string tinyurl::Encode(const std::string &url,
+                            std::unique_ptr<TinyUrlCodec> *codec) {
+    auto &ref=*codec;
+    std::string encoded=ref->keyArray.data();
+    ref->urlMap[encoded] = url ;
+//    NextHash(&(*codec)->keyArray); //nowy kod
     return encoded;
 }
 
-
-/* Dekodowanie:
- * zamień na system dziesiętny
- * weź po 2 liczby nie wiem co dalej  */
-
-std::string tinyurl::Decode(const std::unique_ptr<TinyUrlCodec> &codec, const std::string &hash) {
-    //zamiana z n-tego na 10
-    std::vector<int> digitsFromHash = NToTen(hash);
-    long i=0;
-    std::string decoded;
-    //Xor dekodowanie
-    for (auto index : digitsFromHash) { //podaje po kolei liczby
-        decoded.push_back( (char)(index ^ (int)codec->keyArray[i % codec->keyArray.size()]) );  //odkoduje je
-        i++;
-    }
+std::string tinyurl::Decode(const std::unique_ptr<TinyUrlCodec> &codec,
+                            const std::string &hash) {
+    auto it=codec->urlMap.find(hash);
+    if (it != codec->urlMap.end())
+        return it->second;
+    else
+        return nullptr;
 }
 
-std::vector<int> NToTen(const std::string &basic_string) { //zamienia system n zmiennych na dziesiątkowy
-    std::vector<int> newTranslationToDigits;
-
-    return newTranslationToDigits;
-}
