@@ -69,8 +69,49 @@ std::unique_ptr <SmartTree> datastructures::RestoreTree(const std::string &tree)
     int i=0;
     std::string
     if( tree[i]=='[' )
-        readnumber(tree, i);
 
 
 
 }
+
+/*
+std::unique_ptr <SmartTree> RestoreTree(const std::string &tree){
+    const std::string str=tree;
+    std::string temp="";
+    std::unique_ptr <SmartTree> tree_out;
+    int left_cnt=0,right_cnt=0,i=0,k=0;
+    do{
+        if(str[i]=='['){
+            left_cnt++;
+            i++;
+            if(left_cnt==1){
+                while(str[i]!=32 and str[i]!=']' ){
+                    temp+=str[i];
+                    i++;
+                }
+                if(temp=="none"){
+                    return nullptr;
+                }
+                tree_out=std::move(CreateLeaf(std::stoi(temp)));
+                temp="";
+
+            }
+            if(left_cnt==2 and k==0){
+                tree_out->left=std::move(RestoreTree(&(str[i-1])));
+                k=1;
+            }
+            if(left_cnt==2 and k==1){
+                tree_out->right=std::move(RestoreTree(&(str[i-1])));
+            }
+        }
+        if(str[i]==']'){
+            right_cnt++;
+            left_cnt--;
+        }
+        i++;
+
+    }while(left_cnt!=0);
+    return tree_out;
+}
+}
+ */
