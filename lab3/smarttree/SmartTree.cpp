@@ -63,7 +63,14 @@ std::string datastructures::DumpTree(const std::unique_ptr <SmartTree> &tree){
 
 
 std::unique_ptr <SmartTree> datastructures::RestoreTree(const std::string &tree){
+    //    for(auto i=tree.begin(); i!=tree.end(); i++){
+//        if (i=="[")    } tak nie chce porównywać...
     std::unique_ptr<SmartTree> reconstruct = std::make_unique<SmartTree>();
+    int i=0;
+    std::string
+    if( tree[i]=='[' )
+        readnumber(tree, i);
+
 
 
 }
