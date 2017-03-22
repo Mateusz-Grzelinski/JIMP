@@ -17,7 +17,6 @@ std::unique_ptr <SmartTree> datastructures::CreateLeaf(int value){
 
 std::unique_ptr <SmartTree> datastructures::
 InsertLeftChild(std::unique_ptr <SmartTree> tree, std::unique_ptr <SmartTree> left_subtree){
-//    std::tree <SmartTree> miniHead = std::make_unique<SmartTree>();
     tree->left=move(left_subtree);
     return tree;
 }
@@ -45,7 +44,6 @@ std::string datastructures::DumpTree(const std::unique_ptr <SmartTree> &tree){
         result.append( std::to_string(tree->value) );
         result.append(" ");
         if (tree->left!= nullptr){
-
             result.append(DumpTree(tree->left));
         }
         else
@@ -63,3 +61,9 @@ std::string datastructures::DumpTree(const std::unique_ptr <SmartTree> &tree){
     return result;
 }
 
+
+std::unique_ptr <SmartTree> datastructures::RestoreTree(const std::string &tree){
+    std::unique_ptr<SmartTree> reconstruct = std::make_unique<SmartTree>();
+
+
+}
