@@ -3,30 +3,38 @@
 #include <iostream>
 #include <cmath>
 #include <ostream>
-class Point {
- public:
-  Point();
-  Point(double x, double y);
-  ~Point();
-  
-  //Metody nie modyfikujące stanu obiektu (const na końcu metody)
-  //nie mogą zmodyfikować tego obiektu.
-  void ToString(std::ostream *out) const;
-  double Distance(const Point &other) const;
-  
-  
-  //metody akcesorów są publiczne i tylko w przy ich pomocy
-  //można się dostać z zewnątrz do pól klasy
-  double GetX() const;
-  double GetY() const;
-  
-  //metody seterów pozwalające zmienić stan obiektu 
-  //po jego zainicjalizowaniu
-  void SetX(double x);
-  void SetY(double y);
-private:
-  //w przeciwienstwie do pythona C++ wymaga jawnej deklaracji składowych pól klasy:
-  double x_, y_;
-};
 
+namespace geometry {
+    class Point {
+    public:
+        Point();
+
+        Point(double x, double y);
+
+        ~Point();
+
+        //Metody nie modyfikujące stanu obiektu (const na końcu metody)
+        //nie mogą zmodyfikować tego obiektu.
+        void ToString(std::ostream *out) const;
+
+        double Distance(const Point &other) const;
+
+
+        //metody akcesorów są publiczne i tylko w przy ich pomocy
+        //można się dostać z zewnątrz do pól klasy
+        double GetX() const;
+
+        double GetY() const;
+
+        //metody seterów pozwalające zmienić stan obiektu
+        //po jego zainicjalizowaniu
+        void SetX(double x);
+
+        void SetY(double y);
+
+    private:
+        //w przeciwienstwie do pythona C++ wymaga jawnej deklaracji składowych pól klasy:
+        double x_, y_;
+    };
+}
 #endif  // PROJECTNAME_PATH_POINT_H_

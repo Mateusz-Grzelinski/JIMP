@@ -22,8 +22,8 @@ public:
     std::string ToFirstNamesInitials();
     std::string ToSurnameNames();
     std::string ToNamesSurname();
-    bool IsBeforeBySurname();       //co to ma robić?
-    bool IsBeforeByFirstName();
+    bool IsBeforeBySurname(std::string inputname);       //co to ma robić?
+    bool IsBeforeByFirstName(std::string inputname);
 private:
     string FirstName_, SecondName_, ThirdName_;
     string Surname_;

@@ -9,7 +9,7 @@
 
 
 std::string SimpleUrl::Login() const{
-    std::regex formula(R" ");
+    std::regex formula(R"( )");
     std::smatch matched;
     std::regex_match(url_, matched, formula);
 

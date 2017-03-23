@@ -58,5 +58,20 @@ std::string Name::ToNamesSurname(){
     return ss.str();
 
 }
-bool Name::IsBeforeBySurname();
-bool Name::IsBeforeByFirstName();
+bool Name::IsBeforeBySurname(std::string inputname){
+    std::stringstream objectname(Surname_);
+    objectname<<FirstName_<<SecondName_<<ThirdName_;
+    if (inputname.compare(objectname.str()) > 0)
+        return true;
+    else
+        return false;
+
+}
+bool Name::IsBeforeByFirstName(std::string inputname){
+    std::stringstream objectname("");
+    objectname<<FirstName_<<SecondName_<<ThirdName_<<Surname_;
+    if (inputname.compare(objectname.str()) > 0)
+        return true;
+    else
+        return false;
+}
