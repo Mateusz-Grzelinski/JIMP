@@ -17,7 +17,7 @@ namespace nets {
         std::regex formula(R"(\{\{([^\{\}]+?)\}\})");
         std::smatch matchexpr;
         std::string result = text_;
-//        std::regex_search(result.begin(), result.end(), matchexpr, formula, std::regex_constants::format_first_only);
+        std::regex_search(result, matchexpr, formula, std::regex_constants::format_first_only);
         while(true){
             std::regex_search(result, matchexpr, formula, std::regex_constants::format_first_only);
             if (matchexpr.size()<2)
@@ -30,6 +30,39 @@ namespace nets {
             std::cout<<result<<std::endl;
         }
         return result;
+
+
+//        for(std::sregex_iterator i = std::sregex_iterator(result.begin(), result.end(), formula);
+//            i != std::sregex_iterator();
+//            ++i )
+//        {
+//            std::smatch m = *i;
+//            std::cout << m.str() << " at position " << m.position() << '\n';
+//            unsigned long length = m.str().size();
+//            std::cout<<length<<"substr: "<<m.str().substr(2, length - 4)<<std::endl;
+//            auto replacement = model.find( m.str().substr(2, length - 4) );
+//
+//            result.replace(m.position(), length, replacement->second);
+//            std::cout << result;
+//        }
+//        std::smatch m;
+//        long offset=0;
+//        while(offset<result.size()-1){
+//            const std::string baserange = result.substr(offset);
+//            auto i=std::regex_search(baserange, m, formula, std::regex_constants::format_first_only);
+//            std::cout << m.str() << " at position " << m.position() << '\n';
+//            unsigned long length = m.str().size();
+//            std::cout<<"substr: "<<m.str().substr(2, length - 4)<<std::endl;
+//            auto replacement = model.find( m.str().substr(2, length - 4) );
+//
+//            if (replacement==model.end())
+//                result.replace(m.position(), length, "");
+//            else
+//                result.replace(m.position(), length, replacement->second);
+//            offset+=m.position()+length;
+//            std::cout << result<<std::endl<<std::endl;
+//        }
+
     }
 
 }

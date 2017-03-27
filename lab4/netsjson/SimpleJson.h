@@ -13,8 +13,9 @@ namespace nets {
 
     class JsonValue {
     public:
-        JsonValue(double);
         JsonValue(long);
+        JsonValue(double);
+        JsonValue(bool);
         JsonValue(std::string input);
         JsonValue(std::vector<nets::JsonValue> input);
         JsonValue(std::map<std::string, nets::JsonValue> input);
@@ -24,8 +25,9 @@ namespace nets {
         std::string ToString() const;
 
     private:
-        long intvalue_;
-        double doublevalue_;
+        long *intvalue_;
+        double *doublevalue_;
+        bool *boolvalue_;
         std::string stringvalue_ = nullptr;
         std::vector<nets::JsonValue> table_;
         std::map<std::string, nets::JsonValue> mapjson_ ;
