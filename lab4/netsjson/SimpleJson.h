@@ -8,13 +8,27 @@
 #include <experimental/optional>
 #include <string>
 
+
 namespace nets {
 
     class JsonValue {
     public:
+        JsonValue(double);
+        JsonValue(long);
+        JsonValue(std::string input);
+        JsonValue(std::vector<nets::JsonValue> input);
+        JsonValue(std::map<std::string, nets::JsonValue> input);
+
         std::experimental::optional<JsonValue> ValueByName(const std::string &name) const;
 
         std::string ToString() const;
+
+    private:
+        long intvalue_;
+        double doublevalue_;
+        std::string stringvalue_ = nullptr;
+        std::vector<nets::JsonValue> table_;
+        std::map<std::string, nets::JsonValue> mapjson_ ;
     };
 
 }
