@@ -1,9 +1,9 @@
 //
 // Created by mat on 25.03.17.
 //
-
-#include <string>
-
+#include <iostream>
+#include <cstring>
+#include <ostream>
 #include <map>
 #include <vector>
 #include <experimental/optional>
@@ -12,57 +12,100 @@
 
 namespace nets {
 
-    JsonValue::JsonValue(long input) : intvalue_(&input) {
-        doublevalue_ = nullptr;
+    JsonValue::JsonValue(int input) : intvalue_(input) {
+        enumvalue = INT;
     }
 
-    JsonValue::JsonValue(double input) : doublevalue_(&input) {
-        intvalue_ = nullptr;
+    JsonValue::JsonValue(double input) : doublevalue_(input) {
+        enumvalue = DOUBLE;
     }
 
-    JsonValue::JsonValue(bool input) : boolvalue_(&input) {
-        intvalue_ = nullptr;
-        doublevalue_ = nullptr;
+    JsonValue::JsonValue(bool input) : boolvalue_(input) {
+        enumvalue = BOOL;
     }
 
-    JsonValue::JsonValue(std::string input) : stringvalue_(input) {
-        intvalue_ = nullptr;
-        doublevalue_ = nullptr;
+    JsonValue::JsonValue(std::string input) {
+//        std::string escape("\\\'\"\?"), result("\"");
+
+//        for(auto &i: input){
+//            if(escape.find(i)!=escape.npos)
+//                result.append("\\");
+//            result.push_back(i);
+//        }
+//        result.push_back('\"');
+//        stringvalue_ = result;
+        std::string tmp("\"");
+        tmp.append(input);
+        tmp.push_back('\"');
+        stringvalue_ = tmp;
+        enumvalue = STRING;
     }
 
     JsonValue::JsonValue(std::vector<nets::JsonValue> input) : table_(input) {
-        intvalue_ = nullptr;
-        doublevalue_ = nullptr;
+        enumvalue = VECTOR;
     }
 
     JsonValue::JsonValue(std::map<std::string, nets::JsonValue> input) : mapjson_(input) {
-        intvalue_ = nullptr;
-        doublevalue_ = nullptr;
+        enumvalue = MAP;
+        std::string tmp;
+        for (auto i : input) {
+            tmp.append("\"");
+            tmp.append(i.first);
+            tmp.append("\": ");
+            tmp.append(i.second.stringvalue_);
+
+            i.second.stringvalue_.swap(tmp); //w mapie kazdy json ma postać "klucz" : "wartość"
+        }
     }
+
 
     std::experimental::optional<JsonValue> JsonValue::ValueByName(const std::string &name) const {
         if (mapjson_.count(name)) {
-            JsonValue tmp = this->mapjson_.find(name)->second;
-            return std::experimental::make_optional(tmp);
+            JsonValue tmpjson = this->mapjson_.find(name)->second;
+            return std::experimental::make_optional(tmpjson);
         }
         return {};
     }
 
     std::string JsonValue::ToString() const {
-        if (doublevalue_)
-            return std::to_string(*doublevalue_);
-        if (intvalue_)
-            return std::to_string(*intvalue_);
-        if (!stringvalue_.empty())
-            return stringvalue_;
-        if (!table_.empty()) {
-            std::string result;
-            for (auto &i : table_) {
-                result.append(i.ToString());
+        switch (enumvalue) {
+            case INT : {
+                std::string tmp(stringvalue_);
+                return tmp.append(std::to_string(intvalue_));
             }
-            return result;
+            case DOUBLE : {
+                std::string result(std::to_string(doublevalue_));
+                while (result[result.size() - 1] == '0')
+                    result.pop_back();
+                std::string tmp(stringvalue_);
+                return tmp.append(result);
+            }
+
+            case BOOL:
+                if (boolvalue_)
+                    return "true";
+                else
+                    return "false";
+
+            case STRING :
+                return stringvalue_;
+
+            case VECTOR : {
+                std::string result("[");
+                int indx = 0;
+                for (auto &i : table_) {
+                    result.append(i.ToString());
+                    indx++;
+                    if (indx < table_.size())
+                        result.append(", ");
+                }
+                result.append("]");
+                return result;
+            }
+            default:
+                return "";
         }
-        return "";
     }
+
 
 }
