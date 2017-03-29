@@ -67,8 +67,6 @@ std::unique_ptr <SmartTree> datastructures::RestoreTree(const std::string &tree)
 //        if (i=="[")    } tak nie chce porównywać...
     std::unique_ptr<SmartTree> reconstruct = std::make_unique<SmartTree>();
     int i=0;
-    std::string
-    if( tree[i]=='[' )
 
 
 

@@ -16,7 +16,7 @@ class Name{
 public:
     Name(string, string, string, string); //3 imiona i nazwisko
     Name(string, string, string);   // 2 imiona i nazwisko
-    Name(string, string)    // 1 imię i nazwisko
+    Name(string, string);    // 1 imię i nazwisko
     Name(string);    // wszystko podane razem
     std::string ToFullInitials();
     std::string ToFirstNamesInitials();

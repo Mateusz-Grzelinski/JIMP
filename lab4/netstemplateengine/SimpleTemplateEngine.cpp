@@ -14,9 +14,11 @@ namespace nets {
 
     std::string View::Render(const std::unordered_map<std::string, std::string> &model) const {
 
+ //nie działa z injection. Jak zmusić regex do operowania na substringu?
         std::regex formula(R"(\{\{([^\{\}]+?)\}\})");
         std::smatch matchexpr;
         std::string result = text_;
+        int offset=0;
         std::regex_search(result, matchexpr, formula, std::regex_constants::format_first_only);
         while(true){
             std::regex_search(result, matchexpr, formula, std::regex_constants::format_first_only);
@@ -28,9 +30,9 @@ namespace nets {
             else
                 result = std::regex_replace(result, formula, replacement->second, std::regex_constants::format_first_only);
             std::cout<<result<<std::endl;
+            offset++;
         }
         return result;
-
 
 //        for(std::sregex_iterator i = std::sregex_iterator(result.begin(), result.end(), formula);
 //            i != std::sregex_iterator();
@@ -62,6 +64,7 @@ namespace nets {
 //            offset+=m.position()+length;
 //            std::cout << result<<std::endl<<std::endl;
 //        }
+
 
     }
 

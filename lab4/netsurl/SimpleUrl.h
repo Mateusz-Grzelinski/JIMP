@@ -26,6 +26,6 @@ public:
 
     std::string Fragment() const;
 private:
-    std::string url_
+    std::string url_;
 };
 #endif //JIMP_EXERCISES_SIMPLEURL_H

@@ -24,33 +24,37 @@ namespace nets {
         enumvalue = BOOL;
     }
 
-    JsonValue::JsonValue(std::string input) {
-//        std::string escape("\\\'\"\?"), result("\"");
-
-//        for(auto &i: input){
-//            if(escape.find(i)!=escape.npos)
-//                result.append("\\");
-//            result.push_back(i);
-//        }
-//        result.push_back('\"');
-//        stringvalue_ = result;
-        std::string tmp("\"");
-        tmp.append(input);
-        tmp.push_back('\"');
-        stringvalue_ = tmp;
-        enumvalue = STRING;
-    }
-
     JsonValue::JsonValue(std::vector<nets::JsonValue> input) : table_(input) {
         enumvalue = VECTOR;
+    }
+
+    JsonValue::JsonValue(std::string input) {
+        enumvalue = STRING;
+        std::string tmp("\"");
+//        tmp.append(input);
+        for(int j=0; j<input.size(); j++){
+            if (input[j]=='\\' || input[j]=='\"') {
+                tmp.append("\\");
+            }
+            tmp.push_back(input[j]);
+        }
+        tmp.append("\"");
+        stringvalue_ = tmp;
     }
 
     JsonValue::JsonValue(std::map<std::string, nets::JsonValue> input) : mapjson_(input) {
         enumvalue = MAP;
         std::string tmp;
-        for (auto i : input) {
+        for (auto &i : input) {
             tmp.append("\"");
-            tmp.append(i.first);
+//            tmp.append(i.first);
+            for(int j=0; j<i.first.size(); j++){
+                if (i.first[j]=='\\' ) {
+                    tmp.append("\\");
+                }
+                tmp.push_back(i.first[j]);
+            }
+
             tmp.append("\": ");
             tmp.append(i.second.stringvalue_);
 
@@ -60,6 +64,14 @@ namespace nets {
 
 
     std::experimental::optional<JsonValue> JsonValue::ValueByName(const std::string &name) const {
+//        std::string tmpwithescaped;
+//        for(int j=0; j<name.size(); j++){
+//            if (name[j]=='\\' ) {
+//                tmpwithescaped.append("\\");
+//            }
+//            tmpwithescaped.push_back(name[j]);
+//        }
+
         if (mapjson_.count(name)) {
             JsonValue tmpjson = this->mapjson_.find(name)->second;
             return std::experimental::make_optional(tmpjson);
@@ -80,7 +92,6 @@ namespace nets {
                 std::string tmp(stringvalue_);
                 return tmp.append(result);
             }
-
             case BOOL:
                 if (boolvalue_)
                     return "true";
@@ -102,10 +113,33 @@ namespace nets {
                 result.append("]");
                 return result;
             }
-            default:
-                return "";
-        }
-    }
+            case MAP : {
+                std::string result("{");
+                int counter=0;
+                for( auto &i : mapjson_){
+                    std::string tmp;
+                    result.append("\"");
+                    for(int j=0; j<i.first.size(); j++){
+                        if (i.first[j]=='\\' || i.first[j]=='\"') {
+                            tmp.append("\\");
+                        }
+                        tmp.push_back(i.first[j]);
+                    }
+                    result.append(tmp);
+                    result.append("\": ");
+                    result.append(i.second.ToString());
+//                    if(j!=i.first.size()-1)
+                    counter++;
+                    if(counter<mapjson_.size()) {
+                        result.append(", ");
+                    }
+                }
+                result.push_back('}');
+
+                return result;
+            }
+        } //end of switch
+    } //end of function ToString
 
 
-}
+} //end of namespace

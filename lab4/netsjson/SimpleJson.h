@@ -25,7 +25,8 @@ namespace nets {
         JsonValue(std::string input);
 
         JsonValue(std::vector<nets::JsonValue> input);
-
+//"\"account_balance\": -107
+// "{"\w+": ["\w\.-]+, "\w+": ["\w\.-]+, "\w+": ["\w\.-]+\})"}
         JsonValue(std::map<std::string, nets::JsonValue> input);
 
         std::experimental::optional<JsonValue> ValueByName(const std::string &name) const;
