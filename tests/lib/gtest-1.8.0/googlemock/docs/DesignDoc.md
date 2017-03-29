@@ -116,7 +116,7 @@ we have:
 Sometimes you'll want to parameterize the action.   For that we propose
 another macro
 ```
-ACTION_P(name, param) { statements; }
+ACTION_P(name, param_) { statements; }
 ```
 
 For example,
@@ -134,7 +134,7 @@ invoke the mock function, and the term _parameters_ for the values
 used to instantiate an action.
 
 Note that you don't need to provide the type of the parameter either.
-Suppose the parameter is named `param`, you can also use the
+Suppose the parameter is named `param_`, you can also use the
 Google-Mock-defined symbol `param_type` to refer to the type of the
 parameter as inferred by the compiler.
 
@@ -180,12 +180,12 @@ ACTION(Foo) {
   ... use n instead of arg0 here ...
 }
 
-ACTION_P(Bar, param) {
+ACTION_P(Bar, param_) {
   // Makes sure the type of arg1 is const char*.
   ::testing::StaticAssertTypeEq<const char*, arg1_type>();
 
-  // Makes sure param can be converted to bool.
-  bool flag = param;
+  // Makes sure param_ can be converted to bool.
+  bool flag = param_;
 }
 ```
 where `StaticAssertTypeEq` is a compile-time assertion we plan to add to
@@ -199,7 +199,7 @@ the action and the parameter types.  The rule is relatively simple:
 | **Given Definition** | **Expression** | **Has Type** |
 |:---------------------|:---------------|:-------------|
 | `ACTION(Foo)`        | `Foo()`        | `FooAction`  |
-| `ACTION_P(Bar, param)` | `Bar(int_value)` | `BarActionP<int>` |
+| `ACTION_P(Bar, param_)` | `Bar(int_value)` | `BarActionP<int>` |
 | `ACTION_P2(Baz, p1, p2)` | `Baz(bool_value, int_value)` | `BazActionP2<bool, int>` |
 | ...                  | ...            | ...          |
 

@@ -3,7 +3,7 @@
 //
 
 #include "Square.h"
-
+using namespace geometry;
 int main(){
     Square object(Point (0, 1), Point (0, 0), Point (1, 1), Point (1, 0) );
     std::cout<<"dodbrze\n\n\n";

@@ -20,7 +20,7 @@ namespace geometry {
     }
 
     Point::Point(double x, double y) {
-        cout << "Konstruktor parametrowy" << endl;
+//        cout << "Konstruktor parametrowy" << endl;
         x_ = x;
         y_ = y;
     }

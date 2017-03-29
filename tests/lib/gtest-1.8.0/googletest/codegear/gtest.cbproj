@@ -77,7 +77,7 @@
     <None Include="..\include\gtest\gtest-message.h">
       <BuildOrder>4</BuildOrder>
     </None>
-    <None Include="..\include\gtest\gtest-param-test.h">
+    <None Include="..\include\gtest\gtest-param_-test.h">
       <BuildOrder>5</BuildOrder>
     </None>
     <None Include="..\include\gtest\gtest-spi.h">
@@ -110,10 +110,10 @@
     <None Include="..\include\gtest\internal\gtest-linked_ptr.h">
       <BuildOrder>12</BuildOrder>
     </None>
-    <None Include="..\include\gtest\internal\gtest-param-util-generated.h">
+    <None Include="..\include\gtest\internal\gtest-param_-util-generated.h">
       <BuildOrder>14</BuildOrder>
     </None>
-    <None Include="..\include\gtest\internal\gtest-param-util.h">
+    <None Include="..\include\gtest\internal\gtest-param_-util.h">
       <BuildOrder>13</BuildOrder>
     </None>
     <None Include="..\include\gtest\internal\gtest-port.h">

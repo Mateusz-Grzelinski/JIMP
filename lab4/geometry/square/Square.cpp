@@ -23,7 +23,7 @@ namespace geometry {
         double dist02 = points[0]->Distance(*points[2]);
         double dist23 = points[2]->Distance(*points[3]);
         double dist13 = points[1]->Distance(*points[3]);
-        double diag01 = points[0]->Distance(*points[3]); //diagonal- przekątna
+        double diag01 = points[0]->Distance(*points[3]); //diagonal
         double diag12 = points[1]->Distance(*points[2]); //diagonal
         if (dist01 == dist02 &&
             dist23 == dist13 &&
