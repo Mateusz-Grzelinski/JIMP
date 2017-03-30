@@ -32,7 +32,7 @@ public:
     //5. Destruktor
     ~XXX();
 
-private:
+//private:
     char * name_;
     int param_;
 };

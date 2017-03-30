@@ -26,7 +26,7 @@ int main() {
     //tutaj zostanie wywoały konstruktor kopiujący (argument wysyłany przez wartość)
     //a następnie konstruktor przenoszący (bo wartość tymczasowa wytworzona przez funkcję make_copy()
     //i tak zaraz zginie
-    XXX one_more = make_copy(another_xxx);
+    XXX one_more = another_xxx;
     //tutaj watość tymczasowa z funkcji make_copy już jest niszczona i wywoływany jest destruktor
 
     //...

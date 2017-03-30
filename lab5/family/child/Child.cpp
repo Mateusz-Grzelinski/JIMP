@@ -4,7 +4,10 @@
 
 #include "Child.h"
 
+
+
 namespace family {
+
     Child::Child(std::string name, std::string surname, int age, std::string school) :
             name_(name), surname_(surname), age_(age), school_(school) {
         std::cout << "tworze dziecko\n";

@@ -4,11 +4,12 @@
 #include <iostream>
 #include <Parent.h>
 
-using namespace family;
+
+//using namespace family;
 
 int main(){
-    Child small();
-    Parent big();
-    std::cout<<big<<"\n"<<small;
+//    Child small{};
+    family::Parent big{};
+    std::cout<<big<<"\n";
     return 0;
 }

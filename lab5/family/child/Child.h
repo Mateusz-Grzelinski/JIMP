@@ -7,8 +7,11 @@
 
 #include<iostream>
 #include <string>
+
+//extern class Parent;
 namespace family {
     class Child {
+        friend class Parent;
     public:
         Child(std::string name="Ala", std::string surname="Gog", int age=7, std::string school="Przedszkole");
 
@@ -16,6 +19,7 @@ namespace family {
 
         void ChangeSchool(std::string school="Nowa szkoła");
         friend std::ostream &operator<<(std::ostream &out, const Child toprint);
+        
     private:
         std::string name_, surname_,  school_;
         int age_;

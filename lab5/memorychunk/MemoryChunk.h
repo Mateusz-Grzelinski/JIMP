@@ -8,7 +8,7 @@
 #include <cstdint>
 #include <algorithm>
 
-namespace memorychunk {
+namespace mc {
     class MemoryChunk {
 //        Rule ofFive
     public:
@@ -18,9 +18,20 @@ namespace memorychunk {
 
         size_t ChunkSize() const;
 
+//        Rule of Five
+        MemoryChunk(const MemoryChunk &mm);
+
+        MemoryChunk(MemoryChunk &&mm);
+
+        MemoryChunk &operator=(const MemoryChunk &mm);
+
+        MemoryChunk &operator=(MemoryChunk &&mm);
+
+        ~MemoryChunk();
+
     private:
-        size_t memsize_;
-        size_t chunksize_;
+        int8_t *mem_;
+        size_t howbig_;
     };
 
 }

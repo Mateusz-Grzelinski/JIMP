@@ -5,13 +5,18 @@
 #ifndef JIMP_EXERCISES_MARTIAN_H
 #define JIMP_EXERCISES_MARTIAN_H
 
+#include <iostream>
 
 class Martian {
 public:
     static int liczbaMarsjan;
+
     Martian();
+
     ~Martian();
+
     static bool shouldAttack();
+
     void attack();
 };
 
