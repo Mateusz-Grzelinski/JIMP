@@ -7,7 +7,6 @@
 #include "Polybius.h"
 
 using namespace std;
-//TODO ./program plik-tekst.txt plik-szyfr.txt 1 - zrobić obsługę plików
 int main(int argc, char* argv[]){
 //    cout<< "przykładowy napis: SCISLE TAJNE: "<< endl;
 //    string result= PolybiusCrypt("SCISLE TAJNE");

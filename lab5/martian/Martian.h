@@ -7,7 +7,12 @@
 
 
 class Martian {
-
+public:
+    static int liczbaMarsjan;
+    Martian();
+    ~Martian();
+    static bool shouldAttack();
+    void attack();
 };
 
 

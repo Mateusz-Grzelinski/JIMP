@@ -6,7 +6,6 @@
 #include "Array2D.h"
 
 using namespace std;
-//TODO funkcja ma przyjmować parametry w oparciu o argv, a nie wewnętrzne zmienne
 int main(int argc, char* argv[]){
     int array_x, array_y;
     cout<<"podaj wymiary tablicy x, y:"<<endl;

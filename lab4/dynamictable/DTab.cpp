@@ -21,7 +21,7 @@ DTab::~DTab(){
     delete tab;
 }
 
-void DTab::resize(int newSize){ //TODO przepisanie tablicy
+void DTab::resize(int newSize){
     double *tmp=new double [newSize];
     if (tmp!= nullptr)
         if (newSize>length)
