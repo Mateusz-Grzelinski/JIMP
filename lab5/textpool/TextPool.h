@@ -9,17 +9,27 @@
 #include <string>
 #include <experimental/string_view>
 #include <set>
+#include <memory>
 #include <iostream>
 
 namespace pool {
     class TextPool {
     public:
+//  Rule of Five (z usuniętą możliwością kopiowania):
 
+        TextPool(TextPool &&in);  //kostr. przenoszący
 
-//  domyślny konstruktor
-//  konstruktor z listą inicjalizacyjną
+        TextPool(const TextPool &in); //konstr. kopiujący- tego nie chcę
 
-        TextPool() = default;
+        TextPool &operator=(TextPool &&in);    //przenosi
+
+        TextPool &operator=(const TextPool &in); //kopiujeje
+
+        ~TextPool();  //nie potrzebny
+
+//        Five end--------------------
+
+        TextPool() ;
 
         TextPool(std::initializer_list<std::string> in);
 
@@ -27,22 +37,11 @@ namespace pool {
 
         size_t StoredStringCount() const;
 
-//  Rule of Five (z usuniętą możliwością kopiowania):
 
-        TextPool(TextPool &&in);  //kostr. przenoszący
-
-//        TextPool(const TextPool &in); //konstr. kopiujący- tego nie chcę
-
-        TextPool &operator=(TextPool &&in);    //przenosi
-
-
-        TextPool &operator=(const TextPool &in); //kopiujeje
-
-//        ~TextPool();  //nie potrzebny
 
 
     private:
-        std::set<std::string> wordset_;
+        std::unique_ptr<std::set<std::string>>  wordset_;
     };
 }
 
