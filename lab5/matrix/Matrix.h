@@ -14,29 +14,29 @@ namespace algebra {
 
     class Matrix {
     public:
-        Matrix(unsigned int x, unsigned int y);
+        Matrix(unsigned int x, unsigned int y); //niepotrzebne
         Matrix(std::initializer_list<std::initializer_list<std::complex<double>>> in);
 
         Matrix(std::vector<std::vector<std::complex<double>>> in);
 
-
+        //set, get i size
         void set(unsigned int x, unsigned int y, std::complex<double> &in);
-
         std::complex<double> get(unsigned int x, unsigned int y);
+        unsigned int Size();
 
-
-        Matrix & add(Matrix &mm);
+        const Matrix &Add(const Matrix &mm);
         Matrix &operator+(Matrix &mm); //niepotrzebne, ale fajne :)
 
         Matrix sub(Matrix &mm);
+        Matrix &operator-(Matrix &mm); //niepotrzebne, ale fajne :)
 
-//        Matrix pow(Matrix &mm);
+//        Matrix Pow(Matrix &mm);
 //
-//        Matrix mul(Matrix &mm);
+//        Matrix Mul(Matrix &mm);
 //
-//        Matrix div(Matrix &mm);
+//        Matrix Div(Matrix &mm);
 
-        std::string Print();
+        std::string Print() const;
 
     private:
         //macierz implementowana w jednowymiarowej tablice, do której odnoszę się w taki sposób:

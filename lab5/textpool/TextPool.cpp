@@ -11,24 +11,19 @@
 
 namespace pool {
 
-
     TextPool::TextPool(std::initializer_list<std::string> in) {
-        if (wordset_ == nullptr)
-            wordset_ = std::make_unique<std::set<std::string>>();
-        for (auto &&i : in) {
-            wordset_->insert(i);
-        }
+        for (auto &&i : in)
+            wordset_.insert(i);
     }
 
-
     std::experimental::string_view TextPool::Intern(const std::string &str) {
-        auto found = wordset_->insert(str);
+        auto found = wordset_.insert(str);
         std::experimental::string_view v(*found.first);
         return v;
     }
 
     size_t TextPool::StoredStringCount() const {
-        size_t tmp = wordset_->size();
+        size_t tmp = wordset_.size();
         return tmp;
     }
 }

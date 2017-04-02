@@ -15,21 +15,21 @@
 namespace pool {
     class TextPool {
     public:
+        TextPool() = default;
+
 //  Rule of Five (z usuniętą możliwością kopiowania):
+//
+//        TextPool(TextPool &&in)= delete;  //kostr. przenoszący
 
-        TextPool(TextPool &&in);  //kostr. przenoszący
+//        TextPool(const TextPool &in)= delete; //konstr. kopiujący- tego nie chcę
 
-        TextPool(const TextPool &in); //konstr. kopiujący- tego nie chcę
-
-        TextPool &operator=(TextPool &&in);    //przenosi
-
-        TextPool &operator=(const TextPool &in); //kopiujeje
-
-        ~TextPool();  //nie potrzebny
+//        TextPool &operator=(TextPool &&in)=delete;    //przenosi
+//
+//        TextPool &operator=(const TextPool &in) = delete; //kopiujeje
+//
+//        ~TextPool();  //nie potrzebny
 
 //        Five end--------------------
-
-        TextPool() ;
 
         TextPool(std::initializer_list<std::string> in);
 
@@ -38,10 +38,8 @@ namespace pool {
         size_t StoredStringCount() const;
 
 
-
-
     private:
-        std::unique_ptr<std::set<std::string>>  wordset_;
+        std::set<std::string> wordset_;
     };
 }
 

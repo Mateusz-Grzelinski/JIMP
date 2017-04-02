@@ -7,9 +7,9 @@
 namespace algebra {
     Matrix::Matrix(unsigned int x, unsigned int y) : x_(x), y_(y) {
         if (x_>0 && y_>0) {
-            matrix_.reserve(y_);
-            for (auto &&item : matrix_) {
-                item.reserve(x_);
+            matrix_.reserve(x_);
+            for (auto &item : matrix_) {
+                item.reserve(y_);
             }
         }
     }
@@ -17,12 +17,16 @@ namespace algebra {
     Matrix::Matrix(std::vector<std::vector<std::complex<double>>> in) {
         matrix_=in;
     }
-    Matrix::Matrix(std::initializer_list<std::initializer_list<std::complex<double>>> in) {
-//        std::string tmp;
-//        tmp.insert(tmp.begin, in.begin(), in.end());
-//        for (auto item : in) {
-//            matrix_.insert(matrix_.end(), item.begin(), item.end());
-//        }
+
+    Matrix::Matrix(std::initializer_list<std::initializer_list<std::complex<double>>> in):
+    x_(in.size()), y_((*in.begin()).size()) {
+        int i=0;
+        matrix_.reserve(x_);
+        for ( const std::initializer_list<std::complex<double>> &l : in )
+        {
+            matrix_[i].assign( l );
+            ++i;
+        }
     }
 
     void Matrix::set(unsigned int x, unsigned int y, std::complex<double> &in) {
@@ -34,7 +38,11 @@ namespace algebra {
             return this->matrix_[x][y];
     }
 
-    Matrix & Matrix::add(Matrix &mm) {
+    unsigned int Matrix::Size() {
+        return x_*y_;
+    }
+
+    const Matrix& Matrix::Add(const Matrix &mm) {
         if (this->x_ == mm.x_ && this->y_ == mm.y_)
             for (int i = 0; i < x_; ++i)
                 for (int j = 0; j < y_ ; ++j)
@@ -43,7 +51,7 @@ namespace algebra {
     }
 
     Matrix &Matrix::operator+(Matrix &mm) {
-        this->add(mm);
+        this->Add(mm);
     }
 
     Matrix Matrix::sub(Matrix &mm) {
@@ -54,18 +62,26 @@ namespace algebra {
         return *this;
     }
 
-    std::string Matrix::Print() {
+    Matrix &Matrix::operator-(Matrix &mm) {
+        this->sub(mm);
+    }
+
+    std::string Matrix::Print() const {
         std::stringstream result;
         result<<"[";
         for (int i = 0; i < x_; ++i) {
             for (int j = 0; j < y_; ++j) {
-                result<<this->matrix_[i][j];
+                result<<this->matrix_[i][j].real();
+//                if(this->matrix_[i][j].imag()!=0)
+                result<<"i"<<this->matrix_[i][j].imag();
                 if (j < y_ - 1)
                     result<<", ";
             }
-            result<<"; ";
+            if (i<x_-1)
+                result<<"; ";
         }
         result<<"]";
+        return result.str();
     }
 
 }
