@@ -18,16 +18,16 @@ namespace pool {
         TextPool() = default;
 
 //  Rule of Five (z usuniętą możliwością kopiowania):
-//
-//        TextPool(TextPool &&in)= delete;  //kostr. przenoszący
 
-//        TextPool(const TextPool &in)= delete; //konstr. kopiujący- tego nie chcę
+        TextPool(TextPool &&in)= default;  //kostr. przenoszący
 
-//        TextPool &operator=(TextPool &&in)=delete;    //przenosi
-//
-//        TextPool &operator=(const TextPool &in) = delete; //kopiujeje
-//
-//        ~TextPool();  //nie potrzebny
+        TextPool &operator=(TextPool &&in);    //przenosi
+
+        TextPool(const TextPool &in)= delete; //konstr. kopiujący- tego nie chcę
+
+        TextPool &operator=(const TextPool &in) = delete; //kopiujeje
+
+        ~TextPool()=default;  //nie potrzebny
 
 //        Five end--------------------
 

@@ -10,7 +10,10 @@
 #include "TextPool.h"
 
 namespace pool {
-
+    TextPool& TextPool::operator=(TextPool &&in) {
+        if(this!=&in)
+            wordset_=std::move(in.wordset_);
+    }
     TextPool::TextPool(std::initializer_list<std::string> in) {
         for (auto &&i : in)
             wordset_.insert(i);
@@ -23,7 +26,6 @@ namespace pool {
     }
 
     size_t TextPool::StoredStringCount() const {
-        size_t tmp = wordset_.size();
-        return tmp;
+        return wordset_.size();
     }
 }
