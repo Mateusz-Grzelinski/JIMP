@@ -17,31 +17,28 @@ namespace algebra {
         Matrix(unsigned int x, unsigned int y); //niepotrzebne
         Matrix(std::initializer_list<std::initializer_list<std::complex<double>>> in);
 
-        Matrix(std::vector<std::vector<std::complex<double>>> in);
-
         //set, get i size
-        void set(unsigned int x, unsigned int y, std::complex<double> &in);
-        std::complex<double> get(unsigned int x, unsigned int y);
-        unsigned int Size();
+        void set(unsigned long x, unsigned long y, std::complex<double> in);
+        std::complex<double> get(unsigned int x, unsigned int y) const;
+        unsigned int getx() const;
+        unsigned int gety() const ;
+        unsigned long Size() const;
 
-        const Matrix &Add(const Matrix &mm);
-        Matrix &operator+(Matrix &mm); //niepotrzebne, ale fajne :)
+        //operacje matematyczne:
+        Matrix Add(const Matrix &mm) const ;
 
-        Matrix sub(Matrix &mm);
-        Matrix &operator-(Matrix &mm); //niepotrzebne, ale fajne :)
+        Matrix Sub(const Matrix &mm) const;
 
-//        Matrix Pow(Matrix &mm);
-//
-//        Matrix Mul(Matrix &mm);
-//
+        Matrix Pow(int n) const ;
+
+        Matrix Mul(const Matrix &mm) const ;
+
 //        Matrix Div(Matrix &mm);
 
         std::string Print() const;
 
     private:
-        //macierz implementowana w jednowymiarowej tablice, do której odnoszę się w taki sposób:
-        // matrix_[x_*zadane_y +zadane_x]
-        std::vector<std::vector<std::complex<double>>>  matrix_;
+        std::vector< std::vector<std::complex<double>> >  matrix_;
         unsigned int x_, y_;
     };
 
