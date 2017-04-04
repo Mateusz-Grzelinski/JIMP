@@ -13,7 +13,7 @@ using ::std::swap;
 using ::std::pair;
 
 int main(int argc, char *argv[]) {
-    Matrix m3{2,2};
+    Matrix m3{{1.0i, 0., 0.}, {0., 1.0i, 0.}, {0., 0., 1.0i}};
     const Matrix m1{{7.0, 2.2i, 0.9i}, {0., 1.0, 0.}, {0., 0., 1.0}};
     const Matrix m2{{5.0, 2., 0.9i}, {0., 1.0, 0.}, {0., 0., 1.0}};
 
@@ -24,6 +24,6 @@ int main(int argc, char *argv[]) {
     cout << "Dodawanie" << m1.Add(m2).Print() << endl;
     cout << "Odejmowanie" << (m1.Sub(m2)).Print() << endl;
     cout << "Mnożenie" << (m1.Mul(m2)).Print() << endl;
-//    cout << "Dzielenie" << (m1.Div(m2)).Print() << endl;
     cout << "Potęgowanie" << (m1.Pow(2)).Print() << endl;
+//    cout << "Dzielenie" << (m1.Div(m2)).Print() << endl;
 }

@@ -14,7 +14,6 @@ namespace algebra {
         }
     }
 
-
     Matrix::Matrix(std::initializer_list<std::initializer_list<std::complex<double>>> in) :
             x_(in.size()), y_((*in.begin()).size()) {
         int i = 0;
@@ -44,8 +43,8 @@ namespace algebra {
     Matrix Matrix::Add(const Matrix &mm) const {
         Matrix resultmx{x_, y_};
         if (this->x_ == mm.getx() && this->y_ == mm.gety())
-            for (int i = 0; i < x_; ++i)
-                for (int j = 0; j < y_; ++j) {
+            for (unsigned int i = 0; i < x_; ++i)
+                for (unsigned int j = 0; j < y_; ++j) {
                     std::complex<double> tmpcomplex = this->get(i, j) + mm.get(i, j);
                     resultmx.set(i, j, tmpcomplex);
                 }
@@ -80,16 +79,18 @@ namespace algebra {
     Matrix Matrix::Pow(int n) const {
         Matrix out(x_, y_);
         if (this->x_ == this->y_)
-            if (n != 0) {
-                Matrix tmp(x_, y_);
-                tmp.matrix_ = this->matrix_;
-                out.matrix_ = this->matrix_;
-                for (int i = 1; i <= n; i++) {
-                    out = out.Mul(tmp);
-                }
-            } else if (n == 0) {
+            if (n == 0) {
                 for (unsigned long i = 0; i < this->x_; ++i)
                     out.matrix_[i][i] = 1.;
+            } else if (n == 1)
+                return out;
+            else if (n > 0) {
+                for (int i = 0; i < x_; ++i)
+                    for (int j = 0; j < y_; ++j)
+                        out.matrix_[i][j] = matrix_[i][j];
+                for (int i = 1; i < n; i++) {
+                    out = out.Mul(*this);
+                }
             }
         return out;
     }
