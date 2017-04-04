@@ -5,6 +5,8 @@
 #include "Matrix.h"
 
 namespace algebra {
+    Matrix::Matrix() {}
+
     Matrix::Matrix(unsigned int x, unsigned int y) : x_(x), y_(y) {
         int i = 0;
         matrix_.resize(x_);
@@ -14,12 +16,20 @@ namespace algebra {
         }
     }
 
-    Matrix::Matrix(std::initializer_list<std::initializer_list<std::complex<double>>> in) :
-            x_(in.size()), y_((*in.begin()).size()) {
+//    Matrix::Matrix(std::initializer_list<std::initializer_list<std::complex<double>>> in) : x_(in.size()), y_((*in.begin()).size()) {
+//        int i = 0;
+//        matrix_.reserve(x_);
+//        for (const std::initializer_list<std::complex<double>> &l : in) {
+//            matrix_[i].assign(l);
+//            ++i;
+//        }
+//    }
+
+    Matrix::Matrix(std::initializer_list<std::vector<std::complex<double>>> in):x_(in.size()), y_((*in.begin()).size())  {
         int i = 0;
-        matrix_.reserve(x_);
-        for (const std::initializer_list<std::complex<double>> &l : in) {
-            matrix_[i].assign(l);
+//        matrix_.reserve(x_);
+        for (std::vector<std::complex<double>> l : in) {
+            matrix_.push_back(l);
             ++i;
         }
     }
@@ -53,13 +63,15 @@ namespace algebra {
 
     Matrix Matrix::Sub(const Matrix &mm) const {
         Matrix resultmx{x_, y_};
-        if (this->x_ == mm.getx() && this->y_ == mm.gety())
+        if (this->x_ == mm.getx() && this->y_ == mm.gety()) {
             for (int i = 0; i < x_; ++i)
                 for (int j = 0; j < y_; ++j) {
                     std::complex<double> tmpcomplex = this->get(i, j) - mm.get(i, j);
                     resultmx.set(i, j, tmpcomplex);
                 }
-        return resultmx;
+            return resultmx;
+        }else
+            return Matrix();
     }
 
     Matrix Matrix::Mul(const Matrix &in) const {
@@ -72,13 +84,15 @@ namespace algebra {
                     }
                 }
             }
+            return res;
         }
-        return res;
+        else
+            return Matrix();
     }
 
     Matrix Matrix::Pow(int n) const {
         Matrix out(x_, y_);
-        if (this->x_ == this->y_)
+        if (this->x_ == this->y_) {
             if (n == 0) {
                 for (unsigned long i = 0; i < this->x_; ++i)
                     out.matrix_[i][i] = 1.;
@@ -92,7 +106,9 @@ namespace algebra {
                     out = out.Mul(*this);
                 }
             }
-        return out;
+            return out;
+        }else
+            return Matrix();
     }
 
 

@@ -14,6 +14,7 @@ namespace pool {
         if(this!=&in)
             wordset_=std::move(in.wordset_);
     }
+
     TextPool::TextPool(std::initializer_list<std::string> in) {
         for (auto &&i : in)
             wordset_.insert(i);

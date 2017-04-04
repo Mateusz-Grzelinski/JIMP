@@ -14,8 +14,10 @@ namespace algebra {
 
     class Matrix {
     public:
+        Matrix();
         Matrix(unsigned int x, unsigned int y); //niepotrzebne
-        Matrix(std::initializer_list<std::initializer_list<std::complex<double>>> in);
+//        Matrix(std::initializer_list<std::initializer_list<std::complex<double>>> in);
+        Matrix(std::initializer_list<std::vector<std::complex<double>>> in);
 
         //set, get i size
         void set(unsigned long x, unsigned long y, std::complex<double> in);
