@@ -5,7 +5,7 @@
 #include "Matrix.h"
 
 namespace algebra {
-    Matrix::Matrix() {}
+    Matrix::Matrix():x_(0), y_(0) {}
 
     Matrix::Matrix(unsigned int x, unsigned int y) : x_(x), y_(y) {
         int i = 0;
@@ -77,11 +77,13 @@ namespace algebra {
     }
 
     Matrix Matrix::Mul(const Matrix &in) const {
-        if (this->x_ == in.gety()) {
-            Matrix res(x_, in.y_  ); //res(x_, in.y_)
-            for (unsigned long m = 0; m < this->x_; m++) {
-                for (unsigned long i = 0; i < in.y_; ++i) {
-                    for (unsigned long j = 0; j < this->x_; j++) {
+        unsigned int result_y = in.y_;
+        unsigned int result_x = x_;
+        if (y_ == in.x_) {
+            Matrix res(result_x, result_y); //res(x_, in.y_)
+            for (unsigned long m = 0; m < result_x; m++) {
+                for (unsigned long i = 0; i < result_y; ++i) {
+                    for (unsigned long j = 0; j < in.x_; j++) {
                         res.matrix_[m][i] += this->matrix_[m][j] * in.matrix_[j][i];
                     }
                 }
@@ -93,13 +95,17 @@ namespace algebra {
     }
 
     Matrix Matrix::Pow(int n) const {
-        Matrix out(x_, y_);
         if (this->x_ == this->y_) {
+            Matrix out(x_, y_);
             if (n == 0) {
                 for (unsigned long i = 0; i < this->x_; ++i)
                     out.matrix_[i][i] = 1.;
-            } else if (n == 1)
+            } else if (n == 1) {
+                for (int i = 0; i < x_; ++i)
+                    for (int j = 0; j < y_; ++j)
+                        out.matrix_[i][j] = matrix_[i][j];
                 return out;
+            }
             else if (n > 0) {
                 for (int i = 0; i < x_; ++i)
                     for (int j = 0; j < y_; ++j)
@@ -115,6 +121,7 @@ namespace algebra {
 
 
     std::string Matrix::Print() const {
+        if(x_==0 || y_==0) return "[]";
         std::stringstream result;
         result << "[";
         for (int i = 0; i < x_; ++i) {
