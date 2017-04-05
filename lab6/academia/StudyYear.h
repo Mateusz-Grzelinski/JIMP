@@ -23,6 +23,7 @@ namespace academia {
         StudyYear &operator--();
         StudyYear operator--(int);
 
+        operator int() const;
         friend std::istream &operator>>(std::istream &is, StudyYear howlongread);
     private:
         int studyyear_;
@@ -32,10 +33,13 @@ namespace academia {
     bool operator>=(const StudyYear oneman, const StudyYear otherman );
     bool operator<(const StudyYear oneman, const StudyYear otherman );
     bool operator<=(const StudyYear oneman, const StudyYear otherman );
-    bool operator==(const StudyYear oneman, const StudyYear otherman );
+//    bool operator==(const StudyYear oneman, const StudyYear otherman );
+//    bool operator==(const StudyYear oneman, const int otherman );
 
     std::istream &operator>>(std::istream &is, StudyYear howlongread);
     std::ostream &operator<<(std::ostream &os, StudyYear howlong);
+
+
 
 } //end of namespace
 #endif //JIMP_EXERCISES_STUDYYEAR_H

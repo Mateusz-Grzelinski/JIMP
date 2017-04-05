@@ -35,17 +35,22 @@ namespace academia {
     bool operator<=(const StudyYear oneman, const StudyYear otherman ){
         return (oneman.GetYear()<=otherman.GetYear());
     }
-    bool operator==(const StudyYear oneman, const StudyYear otherman){
-        return (oneman.GetYear()==otherman.GetYear());
-    }
+//    bool operator==(const StudyYear oneman, const StudyYear otherman){
+//        return (oneman.GetYear()==otherman.GetYear());
+//    }
+//    bool operator==(const StudyYear oneman, const int othervalue ){
+//        return (oneman.GetYear()==othervalue);
+//    }
 
     std::istream &operator>>(std::istream &is, StudyYear howlongread){
         is>>howlongread.studyyear_;
         return is;
     }
-
     std::ostream &operator<<(std::ostream &os, StudyYear howlong) {
         os << howlong.GetYear();
     }
+    StudyYear::operator int() const {
+            return studyyear_;
+    };
 
 }//end of namespace
