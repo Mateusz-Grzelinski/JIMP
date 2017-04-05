@@ -48,17 +48,19 @@ namespace algebra {
 
     unsigned int Matrix::gety() const { return this->y_; }
 
-    unsigned long Matrix::Size() const { return x_ * y_; }
+    std::pair<size_t, size_t> Matrix::Size() const { return {x_, y_}; }
 
     Matrix Matrix::Add(const Matrix &mm) const {
         Matrix resultmx{x_, y_};
-        if (this->x_ == mm.getx() && this->y_ == mm.gety())
+        if (this->x_ == mm.getx() && this->y_ == mm.gety()) {
             for (unsigned int i = 0; i < x_; ++i)
                 for (unsigned int j = 0; j < y_; ++j) {
                     std::complex<double> tmpcomplex = this->get(i, j) + mm.get(i, j);
                     resultmx.set(i, j, tmpcomplex);
                 }
-        return resultmx;
+            return resultmx;
+        }
+        else return Matrix();
     }
 
     Matrix Matrix::Sub(const Matrix &mm) const {
@@ -75,8 +77,8 @@ namespace algebra {
     }
 
     Matrix Matrix::Mul(const Matrix &in) const {
-        Matrix res(x_, y_);
         if (this->x_ == in.getx() && this->y_ == in.gety()) {
+            Matrix res(x_, in.y_);
             for (unsigned long m = 0; m < this->x_; m++) {
                 for (unsigned long i = 0; i < in.y_; ++i) {
                     for (unsigned long j = 0; j < this->x_; j++) {

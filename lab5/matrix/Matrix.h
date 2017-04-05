@@ -24,7 +24,7 @@ namespace algebra {
         std::complex<double> get(unsigned int x, unsigned int y) const;
         unsigned int getx() const;
         unsigned int gety() const ;
-        unsigned long Size() const;
+        std::pair<size_t, size_t> Size() const;
 
         //operacje matematyczne:
         Matrix Add(const Matrix &mm) const ;
