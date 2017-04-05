@@ -74,10 +74,10 @@
 		40C84993101A36A60083642A /* libgtest_main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40C8490B101A217E0083642A /* libgtest_main.a */; };
 		40C849A2101A37050083642A /* gtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4539C8FF0EC27F6400A70F4C /* gtest.framework */; };
 		40C849A4101A37150083642A /* gtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4539C8FF0EC27F6400A70F4C /* gtest.framework */; };
-		4539C9340EC280AE00A70F4C /* gtest-param-test.h in Headers */ = {isa = PBXBuildFile; fileRef = 4539C9330EC280AE00A70F4C /* gtest-param-test.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4539C9340EC280AE00A70F4C /* gtest-param_-test.h in Headers */ = {isa = PBXBuildFile; fileRef = 4539C9330EC280AE00A70F4C /* gtest-param_-test.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4539C9380EC280E200A70F4C /* gtest-linked_ptr.h in Copy Headers Internal */ = {isa = PBXBuildFile; fileRef = 4539C9350EC280E200A70F4C /* gtest-linked_ptr.h */; };
-		4539C9390EC280E200A70F4C /* gtest-param-util-generated.h in Copy Headers Internal */ = {isa = PBXBuildFile; fileRef = 4539C9360EC280E200A70F4C /* gtest-param-util-generated.h */; };
-		4539C93A0EC280E200A70F4C /* gtest-param-util.h in Copy Headers Internal */ = {isa = PBXBuildFile; fileRef = 4539C9370EC280E200A70F4C /* gtest-param-util.h */; };
+		4539C9390EC280E200A70F4C /* gtest-param_-util-generated.h in Copy Headers Internal */ = {isa = PBXBuildFile; fileRef = 4539C9360EC280E200A70F4C /* gtest-param_-util-generated.h */; };
+		4539C93A0EC280E200A70F4C /* gtest-param_-util.h in Copy Headers Internal */ = {isa = PBXBuildFile; fileRef = 4539C9370EC280E200A70F4C /* gtest-param_-util.h */; };
 		4567C8181264FF71007740BE /* gtest-printers.h in Headers */ = {isa = PBXBuildFile; fileRef = 4567C8171264FF71007740BE /* gtest-printers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -186,8 +186,8 @@
 				404884A10E2F7BE600CF7658 /* gtest-filepath.h in Copy Headers Internal */,
 				404884A20E2F7BE600CF7658 /* gtest-internal.h in Copy Headers Internal */,
 				4539C9380EC280E200A70F4C /* gtest-linked_ptr.h in Copy Headers Internal */,
-				4539C9390EC280E200A70F4C /* gtest-param-util-generated.h in Copy Headers Internal */,
-				4539C93A0EC280E200A70F4C /* gtest-param-util.h in Copy Headers Internal */,
+				4539C9390EC280E200A70F4C /* gtest-param_-util-generated.h in Copy Headers Internal */,
+				4539C93A0EC280E200A70F4C /* gtest-param_-util.h in Copy Headers Internal */,
 				404884A30E2F7BE600CF7658 /* gtest-port.h in Copy Headers Internal */,
 				404884A40E2F7BE600CF7658 /* gtest-string.h in Copy Headers Internal */,
 				40899F500FFA7281000B29AE /* gtest-tuple.h in Copy Headers Internal */,
@@ -239,10 +239,10 @@
 		40D4CDF40E30E07400294801 /* ReleaseProject.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = ReleaseProject.xcconfig; sourceTree = "<group>"; };
 		40D4CF510E30F5E200294801 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4539C8FF0EC27F6400A70F4C /* gtest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = gtest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4539C9330EC280AE00A70F4C /* gtest-param-test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gtest-param-test.h"; sourceTree = "<group>"; };
+		4539C9330EC280AE00A70F4C /* gtest-param_-test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gtest-param_-test.h"; sourceTree = "<group>"; };
 		4539C9350EC280E200A70F4C /* gtest-linked_ptr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gtest-linked_ptr.h"; sourceTree = "<group>"; };
-		4539C9360EC280E200A70F4C /* gtest-param-util-generated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gtest-param-util-generated.h"; sourceTree = "<group>"; };
-		4539C9370EC280E200A70F4C /* gtest-param-util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gtest-param-util.h"; sourceTree = "<group>"; };
+		4539C9360EC280E200A70F4C /* gtest-param_-util-generated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gtest-param_-util-generated.h"; sourceTree = "<group>"; };
+		4539C9370EC280E200A70F4C /* gtest-param_-util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gtest-param_-util.h"; sourceTree = "<group>"; };
 		4567C8171264FF71007740BE /* gtest-printers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gtest-printers.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -361,7 +361,7 @@
 				224A12A20E9EADCC00BD17FD /* gtest-test-part.h */,
 				404883DB0E2F799B00CF7658 /* gtest-death-test.h */,
 				404883DC0E2F799B00CF7658 /* gtest-message.h */,
-				4539C9330EC280AE00A70F4C /* gtest-param-test.h */,
+				4539C9330EC280AE00A70F4C /* gtest-param_-test.h */,
 				4567C8171264FF71007740BE /* gtest-printers.h */,
 				404883DD0E2F799B00CF7658 /* gtest-spi.h */,
 				404883DE0E2F799B00CF7658 /* gtest.h */,
@@ -379,8 +379,8 @@
 				404883E30E2F799B00CF7658 /* gtest-filepath.h */,
 				404883E40E2F799B00CF7658 /* gtest-internal.h */,
 				4539C9350EC280E200A70F4C /* gtest-linked_ptr.h */,
-				4539C9360EC280E200A70F4C /* gtest-param-util-generated.h */,
-				4539C9370EC280E200A70F4C /* gtest-param-util.h */,
+				4539C9360EC280E200A70F4C /* gtest-param_-util-generated.h */,
+				4539C9370EC280E200A70F4C /* gtest-param_-util.h */,
 				404883E50E2F799B00CF7658 /* gtest-port.h */,
 				404883E60E2F799B00CF7658 /* gtest-string.h */,
 				40899F4D0FFA7271000B29AE /* gtest-tuple.h */,
@@ -439,7 +439,7 @@
 			files = (
 				404884380E2F799B00CF7658 /* gtest-death-test.h in Headers */,
 				404884390E2F799B00CF7658 /* gtest-message.h in Headers */,
-				4539C9340EC280AE00A70F4C /* gtest-param-test.h in Headers */,
+				4539C9340EC280AE00A70F4C /* gtest-param_-test.h in Headers */,
 				4567C8181264FF71007740BE /* gtest-printers.h in Headers */,
 				3BF6F2A50E79B616000F2EEE /* gtest-typed-test.h in Headers */,
 				4048843A0E2F799B00CF7658 /* gtest-spi.h in Headers */,

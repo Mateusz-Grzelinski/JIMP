@@ -9,23 +9,33 @@
 #include<regex>
 #include <cstdint>
 
-class SimpleUrl {
-public:
-    SimpleUrl(std::string);
-    std::string Login() const;
+namespace nets {
+    class SimpleUrl {
+    public:
+        SimpleUrl(std::string);
 
-    std::string Host() const;
+        std::string Login() const;
 
-    std::string Path() const;
+        std::string Host() const;
 
-    uint16_t Port() const;
+        std::string Path() const;
 
-    std::string Scheme() const;
+        uint16_t Port() const;
 
-    std::string Query() const;
+        std::string Scheme() const;
 
-    std::string Fragment() const;
-private:
-    std::string url_;
-};
+        std::string Query() const;
+
+        std::string Fragment() const;
+
+    private:
+        std::string login;
+        std::string host;
+        std::string path;
+        std::string scheme;
+        std::string query;
+        std::string fragment;
+        uint16_t port = 443;
+    };
+}
 #endif //JIMP_EXERCISES_SIMPLEURL_H

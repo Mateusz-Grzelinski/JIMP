@@ -7,8 +7,8 @@ EXTRA_DIST = \
   CHANGES \
   CONTRIBUTORS \
   LICENSE \
-  include/gtest/gtest-param-test.h.pump \
-  include/gtest/internal/gtest-param-util-generated.h.pump \
+  include/gtest/gtest-param_-test.h.pump \
+  include/gtest/internal/gtest-param_-util-generated.h.pump \
   include/gtest/internal/gtest-tuple.h.pump \
   include/gtest/internal/gtest-type-util.h.pump \
   make/Makefile \
@@ -52,11 +52,11 @@ EXTRA_DIST += \
   test/gtest-listener_test.cc \
   test/gtest-message_test.cc \
   test/gtest-options_test.cc \
-  test/gtest-param-test2_test.cc \
-  test/gtest-param-test2_test.cc \
-  test/gtest-param-test_test.cc \
-  test/gtest-param-test_test.cc \
-  test/gtest-param-test_test.h \
+  test/gtest-param_-test2_test.cc \
+  test/gtest-param_-test2_test.cc \
+  test/gtest-param_-test_test.cc \
+  test/gtest-param_-test_test.cc \
+  test/gtest-param_-test_test.h \
   test/gtest-port_test.cc \
   test/gtest_premature_exit_test.cc \
   test/gtest-printers_test.cc \
@@ -187,7 +187,7 @@ lib_libgtest_la_SOURCES = src/gtest-all.cc
 pkginclude_HEADERS = \
   include/gtest/gtest-death-test.h \
   include/gtest/gtest-message.h \
-  include/gtest/gtest-param-test.h \
+  include/gtest/gtest-param_-test.h \
   include/gtest/gtest-printers.h \
   include/gtest/gtest-spi.h \
   include/gtest/gtest-test-part.h \
@@ -202,8 +202,8 @@ pkginclude_internal_HEADERS = \
   include/gtest/internal/gtest-filepath.h \
   include/gtest/internal/gtest-internal.h \
   include/gtest/internal/gtest-linked_ptr.h \
-  include/gtest/internal/gtest-param-util-generated.h \
-  include/gtest/internal/gtest-param-util.h \
+  include/gtest/internal/gtest-param_-util-generated.h \
+  include/gtest/internal/gtest-param_-util.h \
   include/gtest/internal/gtest-port.h \
   include/gtest/internal/gtest-port-arch.h \
   include/gtest/internal/gtest-string.h \

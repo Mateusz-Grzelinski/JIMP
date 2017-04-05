@@ -9,7 +9,7 @@
 #include <MemLeakTest.h>
 #include <MemoryChunk.h>
 
-using ::memorychunk::MemoryChunk;
+using ::mc::MemoryChunk;
 using ::std::make_unique;
 using ::std::move;
 using ::std::fill;
