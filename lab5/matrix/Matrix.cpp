@@ -78,7 +78,7 @@ namespace algebra {
 
     Matrix Matrix::Mul(const Matrix &in) const {
         if (this->x_ == in.gety()) {
-            Matrix res(x_, in.y_);
+            Matrix res(x_, in.y_  ); //res(x_, in.y_)
             for (unsigned long m = 0; m < this->x_; m++) {
                 for (unsigned long i = 0; i < in.y_; ++i) {
                     for (unsigned long j = 0; j < this->x_; j++) {
