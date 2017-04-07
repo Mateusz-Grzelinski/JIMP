@@ -7,7 +7,7 @@ set(SOURCE_FILES Zipper.cpp)
 add_library(libzipper STATIC ${SOURCE_FILES})
 target_include_directories(libzipper PUBLIC .)
 
-add_executable(zipper ${SOURCE_FILES} main.cpp)
+add_executable(zipper ${SOURCE_FILES} main.cpp Iterator.cpp Iterator.h)
 
 target_link_libraries(zipper libzipper)
 

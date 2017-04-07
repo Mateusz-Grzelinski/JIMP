@@ -51,6 +51,6 @@ namespace academia {
     }
     StudyYear::operator int() const {
             return studyyear_;
-    };
+    }
 
 }//end of namespace

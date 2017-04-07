@@ -26,21 +26,37 @@ namespace academia {
         std::string outbyid=out.Id();
         this->RemoveStudent(outbyid);
     }
+    int StudentRepository::StudentCount() {
+        return studentcontainer_.size();
+    }
 
-    Student *StudentRepository::operator[](std::string &searchfor) {
+    Student &StudentRepository::operator[]( const std::string &searchforid) {
         bool flag = true;
         int i=0;
         while  ( i < studentcontainer_.size() && flag) {
-            if (studentcontainer_[i].Id()==searchfor)
+            if (studentcontainer_[i].Id()==searchforid)
                 flag=false;
             i++;
         }
-        if (!flag)
-            return &studentcontainer_[i];
-        else {
-            auto tmp = Student();
-            return &tmp;
+        return studentcontainer_[i];
+
+    }
+
+    bool operator==(StudentRepository &firstrep, StudentRepository &secondrep){
+        bool thesame=true;
+        if(firstrep.StudentCount()!=secondrep.StudentCount())
+            thesame=false;
+        for(int i=0; i< firstrep.StudentCount() && thesame; ++i){
+            if ( !(firstrep.studentcontainer_[i]==secondrep.studentcontainer_[i]))
+                thesame=false;
+        }
+        return thesame;
+    }
+    std::ostream &operator<<(std::ostream &os, StudentRepository stdrep){
+        for(int i=0; i<stdrep.StudentCount(); ++i) {
+            os << stdrep;
+            os << std::endl;
         }
     }
-    
+
 }

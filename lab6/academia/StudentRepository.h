@@ -11,20 +11,22 @@
 
 namespace academia {
     class StudentRepository {
-//        friend class Student;
     public:
         StudentRepository(initializer_list<Student> in);
         void AddStudent(Student &in);
         void RemoveStudent(Student out);
         void RemoveStudent(std::string outbyid);
+        int StudentCount();
 
+        Student &operator[]( const std::string &searchforid);
 
-        Student *operator[](std::string &searchfor);
-
+        friend bool operator==(StudentRepository &firstrep, StudentRepository &secondrep);
     private:
         std::vector<Student> studentcontainer_;
 
     };
-}
 
+    bool operator==(StudentRepository &firstrep, StudentRepository &secondrep);
+std::ostream &operator<<(std::ostream &os, StudentRepository stdrep);
+}
 #endif //JIMP_EXERCISES_STUDENTREPOSITORY_H

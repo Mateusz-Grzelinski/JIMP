@@ -5,6 +5,7 @@
 #ifndef JIMP_EXERCISES_ZIPPER_H
 #define JIMP_EXERCISES_ZIPPER_H
 
+#include "Iterator.h"
 #include <vector>
 #include <string>
 #include <tuple>
@@ -20,18 +21,17 @@ namespace datastructures {
     public:
         static tuple<string, int> zip
                 (vector<string> &v1, vector<int> &v2);
-//        auto operator++(tuple<string, int> &it);
 
-
-
-//        auto operator *(const tuple<string, int>);
-//        auto operator++(int num, tuple<string, int> &it);
-//        bool operator<(tuple<string, int> &it);
-
-//    private:
-//        pair<vector<string>, vector<int>> remember_;
-//        int index_;
+        Iterator end();
+        Iterator begin();
+    private:
+        Iterator it;
     };
 
 }
 #endif //JIMP_EXERCISES_ZIPPER_H
+
+//for(vector<string,int>::iterator it=vs.begin();
+//        it!=vs.end();
+//          ++it)
+
