@@ -36,13 +36,14 @@ namespace datastructures {
 
         Counts & operator[](std::string lookforword);
 
+        friend std::ostream& operator<<(std::ostream &os, const WordCounter &wcout) ;
     private:
         std::fstream file_;
         std::list<std::pair<Word, Counts>> wordcontainer_;
         //brutalne obejście w metodzie FindElement
         std::pair<Word, Counts> brutalwalkby_;
     };
-
+    std::ostream& operator<<(std::ostream &os, const WordCounter &wcout) ;
 
 }
 

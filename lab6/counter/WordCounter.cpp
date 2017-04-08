@@ -41,8 +41,8 @@ namespace datastructures {
             resultsortedlist.push_back(pairitem.first);
         }
         resultsortedlist.sort();
-
-        return resultsortedlist;
+        //TODO
+//        return resultsortedlist;
     }
 
     WordCounter::WordCounter(std::initializer_list<Word> in) {
@@ -69,6 +69,14 @@ namespace datastructures {
 
     Counts & WordCounter::operator[](std::string lookforword) {
         return FindElement(Word(lookforword)).second;
+    }
+
+    std::ostream& operator<<(std::ostream &os, const WordCounter &wcout)  {
+        for (auto &&pairitem : wcout.wordcontainer_) {
+            os<<"Word: \""<<pairitem.first;
+            os<<"\", Count: "<<pairitem.second<<std::endl;
+        }
+        return os;
     }
 }
 

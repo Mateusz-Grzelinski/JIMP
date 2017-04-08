@@ -14,45 +14,53 @@ namespace datastructures {
         count_=setto;
     }
 
-    int operator++(Counts &counttoincrement){
-        counttoincrement.count_++;
-    }
-
     const int Counts::GetCount() const {
         return count_;
     }
 }//end of namespace
+std::ostream &datastructures::operator<<(std::ostream &os, const Counts &cout){
+    os<<cout.GetCount();
+    return os;
+}
 
+int datastructures::operator++( Counts &counttoincrement, int zero){
+    int tmp=counttoincrement.GetCount();
+    ++counttoincrement;
+    return tmp;
+}
+int datastructures::operator++(Counts &counttoincrement){
+    counttoincrement.count_++;
+}
 
 //przeładowania typu: <Counts, Counts>
-bool datastructures::operator==(const datastructures::Counts &one, const datastructures::Counts &two){
+bool datastructures::operator==(const Counts &one, const Counts &two){
     return (one.GetCount()==two.GetCount());
 }
-bool operator<(const datastructures::Counts &one, const datastructures::Counts &two){
+bool datastructures::operator<(const Counts &one, const Counts &two){
     return (one.GetCount()<two.GetCount());
 }
-bool operator>(const datastructures::Counts &one, const datastructures::Counts &two){
+bool datastructures::operator>(const Counts &one, const Counts &two){
     return (one.GetCount()>two.GetCount());
 }
-
-//przeładowania typu: <int, Counts>
-bool operator==(const int one, const datastructures::Counts &two){
-    return (one==two.GetCount());
-}
-bool operator<(const int one, const datastructures::Counts &two){
-    return (one<two.GetCount());
-}
-bool operator>(const int one, const datastructures::Counts &two){
-    return (one>two.GetCount());
-}
-
-//przeładowania typu: <Counts, int>
-bool operator==( const datastructures::Counts &two, const int one){
-    return (one==two.GetCount());
-}
-bool operator<( const datastructures::Counts &two,const int one){
-    return (one==two.GetCount());
-}
-bool operator>(const datastructures::Counts &two, const int one){
-    return (one==two.GetCount());
-}
+//
+////przeładowania typu: <int, Counts>
+//bool operator==(const int one, const datastructures::Counts &two){
+//    return (one==two.GetCount());
+//}
+//bool operator<(const int one, const datastructures::Counts &two){
+//    return (one<two.GetCount());
+//}
+//bool operator>(const int one, const datastructures::Counts &two){
+//    return (one>two.GetCount());
+//}
+//
+////przeładowania typu: <Counts, int>
+//bool operator==( const datastructures::Counts &two, const int one){
+//    return (one==two.GetCount());
+//}
+//bool operator<( const datastructures::Counts &two,const int one){
+//    return (one==two.GetCount());
+//}
+//bool operator>(const datastructures::Counts &two, const int one){
+//    return (one==two.GetCount());
+//}

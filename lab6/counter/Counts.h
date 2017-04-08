@@ -5,6 +5,8 @@
 #ifndef JIMP_EXERCISES_COUNTS_H
 #define JIMP_EXERCISES_COUNTS_H
 
+#include <ostream>
+
 namespace datastructures {
 
     class Counts {
@@ -15,19 +17,23 @@ namespace datastructures {
 
         void SetCount(int setto);
         const int GetCount() const ;
-
+        friend std::ostream &operator<<(std::ostream &os, const Counts &cout);
+        friend int operator++( Counts &counttoincrement, int zero);
         friend int operator++(Counts &counttoincrement);
     private:
         int count_;
     }; //end of class
+
+    int operator++( Counts &counttoincrement, int zero);
     int operator++(Counts &counttoincrement);
-    bool operator==(const datastructures::Counts &one, const datastructures::Counts &two);
+    std::ostream &operator<<(std::ostream &os, const Counts &cout);
+    //przeładowania typu: <Counts, Counts>
+    bool operator<(const Counts &one, const Counts &two);
+    bool operator>(const Counts &one, const Counts &two);
+    bool operator==(const Counts &one, const Counts &two);
 } //end of namespace
 
 
-//przeładowania typu: <Counts, Counts>
-bool operator<(const datastructures::Counts &one, const datastructures::Counts &two);
-bool operator>(const datastructures::Counts &one, const datastructures::Counts &two);
 
 
 //przeładowania typu: <int, Counts>

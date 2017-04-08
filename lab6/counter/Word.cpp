@@ -18,12 +18,17 @@ namespace datastructures {
     bool operator==(const Word &one, const Word &two) {
         return (one.GetWord() == two.GetWord());
     }
-//    bool operator<(const Word &one, const Word &two){
-//        return (one.GetWord()<two.GetWord());
-//    }
-//    bool operator>(const Word &one, const Word &two) {
-//        return (one.GetWord() > two.GetWord());
-//    }
+    bool operator<(const Word &one, const Word &two){
+        return (one.GetWord()<two.GetWord());
+    }
+    bool operator>(const Word &one, const Word &two) {
+        return (one.GetWord() > two.GetWord());
+    }
+    std::ostream& operator<<(std::ostream &os, const Word &wout) {
+        os<<wout.GetWord();
+        return os;
+    }
+
 }
 
 
