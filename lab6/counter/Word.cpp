@@ -4,8 +4,26 @@
 
 #include "Word.h"
 
-namespace wordcounter{
+namespace datastructures {
     Word::Word(std::string in): word_(in) {}
 
+    bool Word::Empty() {
+        return word_.empty();
+    }
 
+    const std::string Word::GetWord() const {
+        return word_;
+    }
+
+    bool operator==(const Word &one, const Word &two) {
+        return (one.GetWord() == two.GetWord());
+    }
+//    bool operator<(const Word &one, const Word &two){
+//        return (one.GetWord()<two.GetWord());
+//    }
+//    bool operator>(const Word &one, const Word &two) {
+//        return (one.GetWord() > two.GetWord());
+//    }
 }
+
+

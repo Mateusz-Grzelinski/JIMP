@@ -4,26 +4,47 @@
 
 #ifndef JIMP_EXERCISES_WORDCOUNTER_H
 #define JIMP_EXERCISES_WORDCOUNTER_H
+
 #include <string>
 #include <fstream>
 #include <utility>
 #include <list>
-#include <iostream>
-#include <regex>
+#include <set>
+//#include <iostream>
+#include <initializer_list>
 #include "Word.h"
 #include "Counts.h"
 
-namespace wordcounter {
+namespace datastructures {
     class WordCounter {
     public:
+        WordCounter();
+
         WordCounter(const std::string &path);
+
+        WordCounter(std::initializer_list<Word> in);
+
         ~WordCounter();
-        void ReadWholeFile();
-//        void IgnoreWate();
+
+        int TotalWords();
+
+        int DistinctWords();
+
+        std::set<Word> Words();
+
+        std::pair<Word, Counts> &FindElement(const Word &checkthisword);
+
+        Counts & operator[](std::string lookforword);
+
     private:
         std::fstream file_;
         std::list<std::pair<Word, Counts>> wordcontainer_;
+        //brutalne obejście w metodzie FindElement
+        std::pair<Word, Counts> brutalwalkby_;
     };
 
+
 }
+
+
 #endif //JIMP_EXERCISES_WORDCOUNTER_H

@@ -5,7 +5,7 @@
 #include "WordCounter.h"
 #include <iostream>
 
-using namespace wordcounter;
+using namespace datastructures;
 using namespace std;
 
 int main() {
