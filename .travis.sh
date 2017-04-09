@@ -18,7 +18,7 @@ for testfolder in lab*; do
 
 	#jeśli istnieje, odpal lab?_all_tests
 	if [ -f *_all_tests ]; then
-		/*_all_tests
+		./*_all_tests
 		echo *all_tests
 	else
 	#jeśli nie ma, odpalaj testy pojedyńczo:
