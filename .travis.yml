@@ -24,6 +24,9 @@ env:
 
 script: ./.travis.sh
 
+git:
+  only:
+  - lab6
 
 notifications:
  email: false
