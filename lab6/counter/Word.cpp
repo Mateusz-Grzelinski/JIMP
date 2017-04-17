@@ -28,6 +28,10 @@ namespace datastructures {
         os<<wout.GetWord();
         return os;
     }
+    std::istream& operator>>(std::istream &is, Word &obj){
+        is>>obj.word_;
+        return is;
+    }
 
 }
 

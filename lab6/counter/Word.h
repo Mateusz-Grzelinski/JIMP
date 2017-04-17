@@ -20,12 +20,14 @@ namespace datastructures {
 
         const std::string GetWord() const;
         friend std::ostream& operator<<(std::ostream &os, const Word &wout) ;
+        friend std::istream& operator>>(std::istream &is, Word &obj);
 
     private:
         std::string word_;
 
     };
-    std::ostream& operator<<(std::ostream &os, const Word &wout) ;
+    std::ostream& operator<<(std::ostream &os, const Word &wout);
+    std::istream& operator>>(std::istream &is, Word &obj);
     bool operator==(const Word &one, const Word &two);
     bool operator<(const Word &one, const Word &two);
     bool operator>(const Word &one, const Word &two);

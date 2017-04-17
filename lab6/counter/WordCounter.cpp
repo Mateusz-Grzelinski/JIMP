@@ -12,17 +12,6 @@
 namespace datastructures {
     WordCounter::WordCounter() {}
 
-    WordCounter::WordCounter(const std::string &path) {
-        file_.open(path, std::fstream::in); //otwarty do odczytu
-        if (file_.good())
-            std::cout << "błąd otwarcia pliku";
-    }
-
-    WordCounter::~WordCounter() {
-        if (file_.is_open())
-            file_.close();
-    }
-
     int WordCounter::TotalWords() {
         int allwords = 0;
         for (auto &&uniqueword : wordcontainer_) {
@@ -36,13 +25,11 @@ namespace datastructures {
     }
 
     std::set<Word> WordCounter::Words() {
-        std::list<Word> resultsortedlist;
+        std::set<Word> resultsortedlist;
         for (auto &pairitem : wordcontainer_) {
-            resultsortedlist.push_back(pairitem.first);
+            resultsortedlist.insert(pairitem.first);
         }
-        resultsortedlist.sort();
-        //TODO
-//        return resultsortedlist;
+        return resultsortedlist;
     }
 
     WordCounter::WordCounter(std::initializer_list<Word> in) {
@@ -63,8 +50,26 @@ namespace datastructures {
             if (wordcountpair.first == checkthisword)
                 return wordcountpair;
         }
-        brutalwalkby_ = std::make_pair(Word(), Counts());
         return brutalwalkby_;
+    }
+
+    void WordCounter::Insert(Word newword) {
+        auto &it = FindElement(newword);
+        if (it.first.Empty())
+            wordcontainer_.push_back(std::make_pair(newword, Counts(0)));
+        else
+            it.second++;
+    }
+
+    WordCounter WordCounter::FromInputStream(std::istream &is) {
+        WordCounter resultwc;
+        while( !is.eof()){
+            Word obj;
+            is>>obj;
+            resultwc.Insert(obj);
+
+        }
+
     }
 
     Counts & WordCounter::operator[](std::string lookforword) {
