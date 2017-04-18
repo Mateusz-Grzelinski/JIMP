@@ -34,7 +34,6 @@ namespace arrays {
     public:
         SquaredFill(int a = 1,int b=0) : a_{a}, b_{b} {}
         int Value(int index) const override ;
-
     private:
         int a_, b_;
     };
@@ -43,12 +42,9 @@ namespace arrays {
     public:
         IncrementalFill(int start=0, int step=1) : start_{start},step_{step} {}
         int Value(int index) const override ;
-
     private:
         int start_,step_;
     };
-
-
 
     class RandomFill : public ArrayFill {
     public:

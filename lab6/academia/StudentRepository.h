@@ -7,9 +7,16 @@
 #include <set>
 #include <vector>
 #include <string>
+//#include <StudentRepositoryQueries.h>
 #include "Student.h"
 
 namespace academia {
+    class Query {
+    public:
+        virtual bool Accept(const Student &student) const =0;
+    };
+
+
     class StudentRepository {
     public:
         StudentRepository(initializer_list<Student> in);
@@ -17,6 +24,8 @@ namespace academia {
         void RemoveStudent(Student out);
         void RemoveStudent(std::string outbyid);
         int StudentCount();
+
+        std::vector<Student> FindByQuery(const Query &query);
 
         Student &operator[]( const std::string &searchforid);
 

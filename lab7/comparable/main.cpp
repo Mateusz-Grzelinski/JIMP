@@ -17,9 +17,11 @@ int main() {
             Student {"3","Niels","Bohr","fizyka",StudyYear{1}},
             Student {"4","Ada","Lovelace","informatyka",StudyYear {4}},
             Student {"5", "Maria","Gopert-Mayer","fizyka",StudyYear {3}}};
+
     sort (test_students.begin(), test_students.end(), cmp);
     for (auto &&  item: test_students ) {
         cout<<item<<endl;
     }
+
     return 0;
 }

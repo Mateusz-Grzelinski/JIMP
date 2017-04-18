@@ -30,12 +30,22 @@ namespace academia {
         return studentcontainer_.size();
     }
 
+    std::vector<Student> StudentRepository::FindByQuery(const Query &query) {
+        std::vector<Student> result;
+        for (auto &&item : studentcontainer_) {
+            if (query.Accept(item))
+                result.push_back(item);
+        }
+        return result;
+    }
     Student &StudentRepository::operator[]( const std::string &searchforid) {
         bool flag = true;
         int i=0;
         while  ( i < studentcontainer_.size() && flag) {
-            if (studentcontainer_[i].Id()==searchforid)
-                flag=false;
+            if (studentcontainer_[i].Id()==searchforid) {
+                flag = false;
+                return studentcontainer_[i];
+            }
             i++;
         }
         return studentcontainer_[i];
