@@ -1,6 +1,7 @@
 //Definicja znajduje się w pliku Point.cpp
 #include <cmath>
 #include <ostream>
+#include <ostream>
 #include "Point.h"
 
 using ::std::ostream;
@@ -12,22 +13,21 @@ using std::cout;
   stosujemy tzw. operator zasięgu - "::" 
 */
 
-//Specjalna inicjalizacja zmiennych. Zmienne są inicjowane
-//nim zostanie wywołane ciało konstruktora
+
 namespace geometry {
     Point::Point() : x_(0), y_(0) {
-//  cout << "Konstruktor bezparametrowy" << endl;
+  cout << "Konstruktor bezparametrowy 2d" << endl;
     }
 
     Point::Point(double x, double y) {
-//        cout << "Konstruktor parametrowy" << endl;
+        std::cout<<"tworze Point2d\n";
         x_ = x;
         y_ = y;
     }
 
     Point::~Point() {
-//  cout << "Destruktor! Nic nie robie, bo nie musze zwalniać pamięci!";
-//  cout << endl;
+  cout << "Destruktor 2d! ";
+  cout << endl;
     }
 
     double Point::GetX() const {
@@ -52,6 +52,10 @@ namespace geometry {
 
     void Point::ToString(std::ostream *out) const {
         (*out) << "(" << GetX() << ";" << GetY() << ")";
+    }
+
+    std::ostream& operator<<(std::ostream& out, const Point &other){
+        out<<"("<<other.GetX()<<", "<<other.GetY()<<")";
     }
 
 }
