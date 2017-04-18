@@ -27,4 +27,24 @@ namespace academia{
         return (student.Year().GetYear()<=year_.GetYear());
     }
 
+
+//    bool OrQuery::Accept(const Student &student) const {
+//        bool flag = false;
+//        for (auto &condit : conditions_) {
+//            flag=condit.Accept(student);
+//            if (flag)
+//                return true;
+//        }
+//        return false;
+//    }
+
+    bool AndQuery::Accept(const Student &student) const {
+        bool flag = true;
+        for (auto &condit : conditions_) {
+            flag=condit.Accept(student);
+            if (!flag) //jesli choc jedno jest false
+                return false;
+        }
+        return true;
+    }
 }

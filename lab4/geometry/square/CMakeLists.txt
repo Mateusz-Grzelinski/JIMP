@@ -6,7 +6,9 @@ set(SOURCE_FILES Square.cpp )
 
 
 add_library(libsquare STATIC ${SOURCE_FILES} )
+
 target_link_libraries(libsquare libpoint)
+
 target_include_directories(libsquare PUBLIC .)
 
 add_executable(square ${SOURCE_FILES} main.cpp)
