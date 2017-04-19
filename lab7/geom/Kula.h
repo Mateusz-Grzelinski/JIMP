@@ -8,7 +8,8 @@
 
 class Kula : public Kolo{
 public:
-    Kula(double X, double Y, double Z, double R): Kolo(X,Y,R), z(Z) {} 
+    void Draw() override ;
+    Kula(double X=0, double Y=0, double Z=0, double R=0): Kolo(X,Y,R), z(Z) {}
     virtual double Pole() const override; 
 private:
     double z;

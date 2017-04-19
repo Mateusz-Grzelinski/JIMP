@@ -6,10 +6,13 @@
 #define JIMP_EXERCISES_KOLO_H
 
 
-class Kolo {
+#include "Shape.h"
+
+class Kolo: public Shape {
 public:
-    Kolo(double X, double Y, double R): x(X), y(Y), r(R) {};
+    Kolo(double X=0, double Y=0, double R=0): x(X), y(Y), r(R) {};
     virtual double Pole() const;
+    void Draw() override ;
 
 protected:
     double r;

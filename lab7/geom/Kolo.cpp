@@ -8,3 +8,7 @@
 double Kolo::Pole() const {
     return 3.14*2*r;
 }
+
+void Kolo::Draw() {
+    std::cout<<"rysuje kolo\n";
+}
