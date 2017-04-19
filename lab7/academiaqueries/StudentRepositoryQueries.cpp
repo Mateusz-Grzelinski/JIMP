@@ -38,13 +38,13 @@ namespace academia{
 //        return false;
 //    }
 
-    bool AndQuery::Accept(const Student &student) const {
-        bool flag = true;
-        for (auto &condit : conditions_) {
-            flag=condit.Accept(student);
-            if (!flag) //jesli choc jedno jest false
-                return false;
-        }
-        return true;
-    }
+//    bool AndQuery::Accept(const Student &student) const {
+//        bool flag = true;
+//        for (auto &condit : conditions_) {
+//            flag=condit.Accept(student);
+//            if (!flag) //jesli choc jedno jest false
+//                return false;
+//        }
+//        return true;
+//    }
 }

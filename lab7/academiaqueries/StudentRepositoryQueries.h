@@ -57,17 +57,17 @@ namespace academia {
 //        std::vector<Query> conditions_;
 //    };
 
-    class AndQuery : public Query{
-    public:
-        AndQuery(initializer_list<Query> condit) {
-            for (auto &&item : condit) {
-                conditions_.push_back(item);
-            }
-
-        };
-        bool Accept(const Student &student) const override;
-    private:
-        std::vector<Query> conditions_;
-    };
+//    class AndQuery : public Query{
+//    public:
+//        AndQuery(initializer_list<Query> condit) {
+//            for (auto &&item : condit) {
+//                conditions_.push_back(item);
+//            }
+//
+//        };
+//        bool Accept(const Student &student) const override;
+//    private:
+//        std::vector<Query> conditions_;
+//    };
 }
 #endif //JIMP_EXERCISES_STUDENTREPOSITORYQUERIES_H

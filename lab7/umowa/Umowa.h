@@ -52,4 +52,6 @@ public:
     friend ostream &operator<<(ostream &, Pracownik &);
 };
 
+ostream &operator<<(ostream &, Pracownik &);
+
 #endif //JIMP_EXERCISES_UMOWA_H
