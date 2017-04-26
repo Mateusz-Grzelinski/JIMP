@@ -8,42 +8,44 @@
 #include "Kula.h"
 #include "Square.h"
 #include "Triangle.h"
+#include <memory>
 
 using namespace std;
 
 int main() {
     Kula kl(0, 0, 0, 10);
     Triangle tr;
-    tr.Draw();
     std::cout << "pole kuli: " << kl.Pole()<<std::endl;
     std::cout << "pole przekroju: " << kl.Kolo::Pole();
 
-    list<Shape> shapelist; //gdzie tu jest haczyk?
+    list<unique_ptr<Shape>> shapelist;
 
     for (int i = 0; i < 10; ++i) {
         switch (rand()%4){
             case 0: {
-                shapelist.push_back(Triangle() );
+                shapelist.push_back( make_unique<Triangle>() );
                 break;
             }
             case 1: {
-                shapelist.push_back(Kolo() );
+                shapelist.push_back( make_unique<Kolo>() );
                 break;
             }
             case 2: {
-                shapelist.push_back(Kula() );
+                shapelist.push_back(make_unique<Kula>() );
                 break;
             }
             case 3: {
-                shapelist.push_back(Square() );
+                shapelist.push_back(make_unique<Square>() );
                 break;
             }
-            default:{
+            default: {
                 cout<<"error";
             }
         }
-
     }
 
+    for (auto &&item : shapelist) {
+        item->Draw();
+    }
     return 0;
 }

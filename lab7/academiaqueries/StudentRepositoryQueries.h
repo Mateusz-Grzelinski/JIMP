@@ -49,25 +49,20 @@ namespace academia {
         StudyYear year_;
     };
 
-//    class OrQuery : public Query{
-//    public:
-//        OrQuery(initializer_list<Query> condit): conditions_(condit) {};
-//        bool Accept(const Student &student) const override;
-//    private:
-//        std::vector<Query> conditions_;
-//    };
+    class OrQuery : public Query{
+    public:
+        OrQuery(Query &&conditfirst, Query &&conditsecond): first_(conditfirst), second_(conditsecond) {};
+        bool Accept(const Student &student) const override;
+    private:
+        Query &first_, &second_;
+    };
 
-//    class AndQuery : public Query{
-//    public:
-//        AndQuery(initializer_list<Query> condit) {
-//            for (auto &&item : condit) {
-//                conditions_.push_back(item);
-//            }
-//
-//        };
-//        bool Accept(const Student &student) const override;
-//    private:
-//        std::vector<Query> conditions_;
-//    };
+    class AndQuery : public Query{
+    public:
+        AndQuery(Query &&conditfirst, Query &&conditsecond): first_(conditfirst), second_(conditsecond) {};
+        bool Accept(const Student &student) const override;
+    private:
+        Query &first_, &second_;
+    };
 }
 #endif //JIMP_EXERCISES_STUDENTREPOSITORYQUERIES_H
