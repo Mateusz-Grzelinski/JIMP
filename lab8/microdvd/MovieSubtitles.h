@@ -12,6 +12,7 @@
 #include <sstream>
 #include <regex>
 #include <iostream>
+#include "SubtitleError.h"
 
 namespace moviesubs {
     class MovieSubtitles {
@@ -21,6 +22,8 @@ namespace moviesubs {
         virtual void FindFrames(const std::string &in)=0;
         virtual void FindWords(const std::string &in)=0;
         virtual void Delay(const int delay, const int fps, std::istream *in, std::ostream *out)=0;
+    private:
+        virtual void CheckSemantics(const std::string &in)=0;
 
         };
 
@@ -30,15 +33,14 @@ namespace moviesubs {
             MicroDvdSubtitles()= default;
             void FindFrames(const std::string &in) override;
             void Delay(const int delay, const int fps, std::istream *in, std::ostream *out) override;
-
             void FindWords(const std::string &in) override;
 
         private:
+            void CheckSemantics(const std::string &in) override;
             unsigned long CheckIfItsNumber(const std::string &in);
-            std::vector<unsigned long> frames_;
+            std::vector<long> frames_;
             std::vector<std::string> words_;
         };
-
 
 }
 
