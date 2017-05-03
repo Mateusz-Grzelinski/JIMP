@@ -9,38 +9,36 @@
 
 namespace academia {
     class Comparable {
+    public:
         virtual bool IsLess(const Student &left, const Student &right)=0;
+        bool operator()(const Student &left, const Student &right);
     };
 
 
     class ByFirstNameAscending : public Comparable {
     public:
         bool IsLess(const Student &left, const Student &right) override ;
-        bool operator()(const Student &left, const Student &right);
+
     };
 
     class ByFirstNameDescending : public Comparable {
     public:
         bool IsLess(const Student &left, const Student &right) override;
-        bool operator()(const Student &left, const Student &right);
     };
 
     class ByLastNameAscending : public Comparable {
     public:
         bool IsLess(const Student &left, const Student &right) override;
-        bool operator()(const Student &left, const Student &right);
     };
 
     class ByProgramAscendingEmptyFirst : public Comparable {
     public:
         bool IsLess(const Student &left, const Student &right) override;
-        bool operator()(const Student &left, const Student &right);
     };
 
     class ByProgramAscendingEmptyLast : public Comparable {
     public:
         bool IsLess(const Student &left, const Student &right) override;
-        bool operator()(const Student &left, const Student &right);
     };
 
 }

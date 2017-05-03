@@ -9,25 +9,17 @@ namespace academia {
         return (left.FirstName() < right.FirstName());
     }
 
-    bool ByFirstNameAscending::operator()(const Student &left, const Student &right) {
-        return IsLess(left, right);
-    }
 
     bool ByFirstNameDescending::IsLess(const Student &left, const Student &right) {
         return (left.FirstName() > right.FirstName());
     }
 
-    bool ByFirstNameDescending::operator()(const Student &left, const Student &right) {
-        return IsLess(left, right);
-    }
+ 
 
     bool ByLastNameAscending::IsLess(const Student &left, const Student &right) {
         return (left.LastName() < right.LastName());
     }
 
-    bool ByLastNameAscending::operator()(const Student &left, const Student &right) {
-        return IsLess(left, right);
-    }
 
     bool ByProgramAscendingEmptyFirst::IsLess(const Student &left, const Student &right) {
         if (left.Program()=="")
@@ -36,10 +28,6 @@ namespace academia {
             return false;
         else
             return (left.Program() < right.Program());
-    }
-
-    bool ByProgramAscendingEmptyFirst::operator()(const Student &left, const Student &right) {
-        return IsLess(left, right);
     }
 
     bool ByProgramAscendingEmptyLast::IsLess(const Student &left, const Student &right) {
@@ -51,7 +39,7 @@ namespace academia {
             return (left.Program() < right.Program());
     }
 
-    bool ByProgramAscendingEmptyLast::operator()(const Student &left, const Student &right) {
+    bool Comparable::operator()(const Student &left, const Student &right) {
         return IsLess(left, right);
     }
 

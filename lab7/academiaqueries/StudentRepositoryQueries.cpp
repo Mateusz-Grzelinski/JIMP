@@ -28,23 +28,11 @@ namespace academia{
     }
 
 
-//    bool OrQuery::Accept(const Student &student) const {
-//        bool flag = false;
-//        for (auto &condit : conditions_) {
-//            flag=condit.Accept(student);
-//            if (flag)
-//                return true;
-//        }
-//        return false;
-//    }
+    bool OrQuery::Accept(const Student &student) const {
+        return (first_.Accept(student) || second_.Accept(student));
+    }
 
-//    bool AndQuery::Accept(const Student &student) const {
-//        bool flag = true;
-//        for (auto &condit : conditions_) {
-//            flag=condit.Accept(student);
-//            if (!flag) //jesli choc jedno jest false
-//                return false;
-//        }
-//        return true;
-//    }
+    bool AndQuery::Accept(const Student &student) const {
+        return (first_.Accept(student) && second_.Accept(student));
+    }
 }
