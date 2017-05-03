@@ -7,14 +7,6 @@
 #include <iostream>
 using namespace std;
 
-class CircleException{
-    // Oznacza ze nie mozna wyrysowac kola
-};
-
-class BallException : public CircleException{
-    // Oznacza ze nie mozna wyrysowac kuli
-};
-
 void drawBall() {
     throw BallException();
 }
@@ -24,7 +16,7 @@ int main() {
         drawBall();
     } catch (const BallException &b) {
         cout << "Blad podczas rysowania kuli" << endl;
-    } catch (CircleException a) {
+    } catch (const CircleException &a) {
         cout << "Blad podczas rysowania kola" << endl;
     }
 }

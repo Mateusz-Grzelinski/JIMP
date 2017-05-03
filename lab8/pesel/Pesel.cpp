@@ -3,31 +3,32 @@
 //
 
 #include "Pesel.h"
+#include <sstream>
 
 namespace academia {
-    Pesel::Pesel(std::string pesel) {
-        validatePESEL(pesel.c_str());
-        pesel_ = pesel;
-    }
 
+    int Sum(const std::string &str) {
+        const char *c = str.c_str();
+        int sum = 0, weights[] = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1};
 
-    bool ValidateLetter(const char *checkpesel, int currentsize) {
-        return checkpesel[currentsize] == 'a';
-    }
-
-    bool validatePESEL(const char *checkpesel) {
-        int currentsize;
-        for (currentsize = 0; checkpesel[currentsize]!='\0'; ++currentsize) {
-            if(ValidateLetter(checkpesel, currentsize))
-                throw InvalidPeselCharacter();
-
+        for (int i = 0; i < str.size(); ++i) {
+            sum += ((int) c[i] - 48) % 10 * weights[i];
         }
-        if(currentsize==9)
-            throw InvalidPeselLength();
 
-
-
+        return sum;
     }
 
+    void CharactersValidation(const std::string &str) {
+        const char *c = str.c_str();
+        for (int i = 0; i < str.size(); ++i) {
+            if ((int) c[i] > (int) '9' || (int) c[i] < (int) '0') throw InvalidPeselCharacter(str);
+        }
+    }
+
+    void Pesel::Validate(const std::string &pesel) const {
+        CharactersValidation(pesel);
+        if (pesel.size() != 11) throw InvalidPeselLength(pesel, pesel.size());
+        if (Sum(pesel) % 10 != 0) throw InvalidPeselChecksum(pesel, Sum(pesel));
+    }
 
 }

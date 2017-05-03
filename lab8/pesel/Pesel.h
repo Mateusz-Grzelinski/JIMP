@@ -7,38 +7,39 @@
 #define JIMP_EXERCISES_PESEL_H
 #include <string>
 #include <stdexcept>
+#include <exception>
 
 
 namespace academia {
+    class AcademiaDataValidationError : public std::runtime_error{
+    protected:
+        AcademiaDataValidationError(const std::string &s) : std::runtime_error(s){};
+    };
+
+    class InvalidPeselChecksum : public AcademiaDataValidationError{
+    public:
+        InvalidPeselChecksum(const std::string &pesel, int sum) : AcademiaDataValidationError("Invalid PESEL("+pesel+") checksum: "+std::to_string(sum)){}
+    };
+
+    class InvalidPeselCharacter : public AcademiaDataValidationError{
+    public:
+        InvalidPeselCharacter(const std::string &pesel) : AcademiaDataValidationError("Invalid PESEL("+pesel+") character set"){}
+    };
+
+    class InvalidPeselLength : public AcademiaDataValidationError{
+    public:
+        InvalidPeselLength(const std::string &pesel, unsigned long len) : AcademiaDataValidationError("Invalid PESEL("+pesel+") length: "+std::to_string(len)){}
+    };
 
     class Pesel {
     public:
-        Pesel(std::string pesel);
-
+        Pesel(const std::string &p){
+            Validate(p);
+            pesel_=p;
+        };
     private:
         std::string pesel_;
-    };
-
-
-    bool validatePESEL(const char *);
-    bool ValidateLetter(const char *checkpesel, int currentsize);
-
-
-    class AcademiaDataValidationError: public std::runtime_error{
-        AcademiaDataValidationError(std: ::string info): runtime_error(info){}
-    };
-
-    class InvalidPeselChecksum: public AcademiaDataValidationError{
-        InvalidPeselChecksum():AcademiaDataValidationError("sums") {};
-    };
-    class InvalidPeselLength: public std::runtime_error{
-
-    };
-    class InvalidPeselCharacter: public std::runtime_error{
-
-    };
-    class AcademiaDataValidationError: public std::runtime_error{
-
+        void Validate(const std::string &pesel) const;
     };
 
 }
