@@ -17,31 +17,41 @@
 namespace moviesubs {
     class MovieSubtitles {
     public:
-        MovieSubtitles()=default;
-        void ShiftAllSubtitlesBy(const int delay, const int fps, std::istream *in, std::ostream *out);
-        virtual void FindFrames(const std::string &in)=0;
-        virtual void FindWords(const std::string &in)=0;
+        virtual void ShiftAllSubtitlesBy(const int delay, const int fps, std::istream *in, std::ostream *out);
+        virtual void FindFramesAndWords(const std::string &in)=0;
         virtual void Delay(const int delay, const int fps, std::istream *in, std::ostream *out)=0;
+    protected:
+        unsigned long CheckIfItsNumber(const std::string &in);
+        void CheckIfIsMatched(const std::smatch &match);
+        std::vector<long> frames_;
+        std::vector<std::string> words_;
     private:
-        virtual void CheckSemantics(const std::string &in)=0;
-
-        };
+        std::string &getLine(std::istream *in, std::string &tmpstring) const;
+        void CheckFrameRate(const int fps);
+    };
 
 //-------MicroDvdSubtitles-------
         class MicroDvdSubtitles : public MovieSubtitles {
         public:
             MicroDvdSubtitles()= default;
-            void FindFrames(const std::string &in) override;
+            void FindFramesAndWords(const std::string &in) override;
             void Delay(const int delay, const int fps, std::istream *in, std::ostream *out) override;
-            void FindWords(const std::string &in) override;
-
         private:
-            void CheckSemantics(const std::string &in) override;
-            unsigned long CheckIfItsNumber(const std::string &in);
-            std::vector<long> frames_;
-            std::vector<std::string> words_;
+            void CheckIfFrameWillBeNegative(const long &delayinframes);
+            void CheckFrameOrder();
+
         };
 
+//-------SubRipSubtitles-------
+    class SubRipSubtitles: public MovieSubtitles{
+    public:
+        void FindFramesAndWords(const std::string &in) override;
+        void Delay(const int delay, const int fps, std::istream *in, std::ostream *out) override;
+    private:
+        void CheckFrameOrder();
+        long ConvetrToMiliseconds(std::smatch results, int whichset);
+        std::string ConvertToFormatedOutput(long &in);
+    };
 }
 
 
