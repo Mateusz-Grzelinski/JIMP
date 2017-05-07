@@ -7,17 +7,6 @@
 
 namespace moviesubs {
 //-------MicroDvdSubtitles-------
-    void MovieSubtitles::ShiftAllSubtitlesBy(const int delay, const int fps, std::istream *in, std::ostream *out) {
-        std::string tmpstring;
-        CheckFrameRate(fps);
-        do {
-            tmpstring = getLine(in, tmpstring);
-            FindFramesAndWords(tmpstring);
-            tmpstring.clear();
-        } while (in->peek() != -1);
-        Delay(delay, fps, in, out);
-    }
-
     std::string &MovieSubtitles::getLine(std::istream *in, std::string &tmpstring) const {
         (*in) >> std::ws;
         while (in->peek() != '\n' && in->peek() != -1) {
@@ -60,6 +49,16 @@ namespace moviesubs {
     }
 
 //-------MicroDvdSubtitles-------
+    void MicroDvdSubtitles::ShiftAllSubtitlesBy(const int delay, const int fps, std::istream *in, std::ostream *out) {
+        std::string tmpstring;
+        CheckFrameRate(fps);
+        do {
+            tmpstring = getLine(in, tmpstring);
+            FindFramesAndWords(tmpstring);
+            tmpstring.clear();
+        } while (in->peek() != -1);
+        Delay(delay, fps, in, out);
+    }
     void MicroDvdSubtitles::FindFramesAndWords(const std::string &in) {
         std::regex formula{R"(\s*\{([^\{\}]+)?\}\{([^\{\}]+)?\}(\{?.*\}?.*))"};
         std::smatch match;
@@ -106,9 +105,22 @@ namespace moviesubs {
         }
     }
 
+
 //-------SubRipSubtitles-------
+    void SubRipSubtitles::ShiftAllSubtitlesBy(const int delay, const int fps, std::istream *in, std::ostream *out) {
+        std::string tmpstring;
+        CheckFrameRate(fps);
+        int iterator=1;
+        do {
+            tmpstring = GetSegment(in, tmpstring, iterator);
+            FindFramesAndWords(tmpstring);
+            tmpstring.clear();
+//            ++iterator;
+        } while (in->peek() != -1);
+        Delay(delay, fps, in, out);
+    }
     void SubRipSubtitles::FindFramesAndWords(const std::string &in) {
-        std::regex formula{R"(\s*(.+):(.+):(.+),(.+)\s*-->\s*(.+):(.+):(.+),(.+)([.\s]+))"};
+        std::regex formula{R"(\d+\s*(.+):(.+):(.+),(.+?)\s*-->\s*(.+):(.+):(.+),(.+)([\s\S]+))"};
         std::smatch match;
         std::regex_match(in, match, formula);
 //        CheckIfIsMatched(match);
@@ -131,7 +143,6 @@ namespace moviesubs {
             *out << words_[i];
         }
     }
-
     long SubRipSubtitles::ConvetrToMiliseconds(std::smatch results, int whichset) {
         long timeinmiliseconds=0;;
         //petla dodaje wszystkie godziny i minuty i sekundy
@@ -144,7 +155,6 @@ namespace moviesubs {
         timeinmiliseconds+=CheckIfItsNumber(results[whichset+4].str());
         return timeinmiliseconds;
     }
-
     std::string SubRipSubtitles::ConvertToFormatedOutput(long &in) {
         long tmph=in/60;
         long tmpm=(in-tmph)/60;
@@ -168,5 +178,14 @@ namespace moviesubs {
         }
     }
 
+    std::string SubRipSubtitles::GetSegment(std::istream *in, std::string result, int &iterator) {
+
+
+        return result;
+    }
+
 
 }
+
+
+
