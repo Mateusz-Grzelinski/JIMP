@@ -6,11 +6,15 @@
 
 namespace algo {
     std::set<std::string> Keys(const std::map<std::string, int> &m) {
-        return std::set<std::string>();
+        std::set<std::string> tmp;
+//        std::for_each(m.begin(), m.end(), [tmp](const std::pair<std::string, int> &it){tmp.insert(it.first); });
+//        return tmp;
+//        std::transform(m.begin(), m.end(), tmp.begin(), )
     }
-
-    std::set<std::string> Values(const std::map<std::string, int> &m) {
-        return std::set<std::string>();
+    std::vector<int> Values(const std::map<std::string, int> &m) {
+        std::vector<int> tmp(m.size());
+//        std::for_each(m.begin(), m.end(), [tmp](const std::pair<std::string, int> it){tmp.push_back(it.second); });
+        return tmp;
     }
 
     std::map<std::string, int> DivisableBy(const std::map<std::string, int> &m, int divisor) {
@@ -18,7 +22,7 @@ namespace algo {
     }
 
     void SortInPlace(std::vector<int> *v) {
-
+        std::sort(v->begin(), v->end());
     }
 
     std::vector<int> Sort(const std::vector<int> &v) {
@@ -62,11 +66,11 @@ namespace algo {
     }
 
     bool ContainsKey(const std::map<std::string, int> &v, const std::string &key) {
-        return false;
+        return std::any_of(v.begin(), v.end(), [key](const std::pair<std::string, int> p){ return (key==p.first); });
     }
 
     bool ContainsValue(const std::map<std::string, int> &v, int value) {
-        return false;
+        return std::any_of(v.begin(), v.end(), [value](const std::pair<std::string, int> p){ return (value==p.second); });
     }
 
     std::vector<std::string> RemoveDuplicates(const std::vector<std::string> &v) {

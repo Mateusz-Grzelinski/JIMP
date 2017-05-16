@@ -13,7 +13,7 @@
 
 namespace algo {
     std::set<std::string> Keys(const std::map<std::string, int> &m);
-    std::set<std::string> Values(const std::map<std::string, int> &m);
+    std::vector<int> Values(const std::map<std::string, int> &m);
     std::map<std::string, int> DivisableBy(const std::map<std::string, int> &m,int divisor);
     void SortInPlace(std::vector<int> *v);
     std::vector<int> Sort(const std::vector<int> &v);
