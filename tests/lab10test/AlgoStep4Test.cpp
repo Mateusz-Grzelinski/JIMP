@@ -24,19 +24,19 @@ TEST_F(AlgoStep4, DefineMethod_ContainsKey) {
   EXPECT_EQ(true, ContainsKey(arg,"abc"));
   EXPECT_EQ(false, ContainsKey(arg,"xyz"));
 }
-
-TEST_F(AlgoStep4, DefineMethod_Keys) {
-  std::set<std::string> expected {"efg","abc"};
-  EXPECT_EQ(expected, Keys({{"abc",1},{"efg",1}}));
-}
-
-TEST_F(AlgoStep4, DefineMethod_ContainsValue) {
-  std::map<std::string, int> arg {{"abc",1},{"efg",1}};
-  EXPECT_EQ(true, ContainsValue(arg,1));
-  EXPECT_EQ(false, ContainsValue(arg,2));
-}
-
-TEST_F(AlgoStep4, DefineMethod_Values) {
-  std::vector<int> expected {1,1};
-  EXPECT_EQ(expected, Values({{"abc",1},{"efg",1}}));
-}
+//
+//TEST_F(AlgoStep4, DefineMethod_Keys) {
+//  std::set<std::string> expected {"efg","abc"};
+//  EXPECT_EQ(expected, Keys({{"abc",1},{"efg",1}}));
+//}
+//
+//TEST_F(AlgoStep4, DefineMethod_ContainsValue) {
+//  std::map<std::string, int> arg {{"abc",1},{"efg",1}};
+//  EXPECT_EQ(true, ContainsValue(arg,1));
+//  EXPECT_EQ(false, ContainsValue(arg,2));
+//}
+//
+//TEST_F(AlgoStep4, DefineMethod_Values) {
+//  std::vector<int> expected {1,1};
+//  EXPECT_EQ(expected, Values({{"abc",1},{"efg",1}}));
+//}

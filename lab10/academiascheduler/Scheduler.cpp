@@ -113,7 +113,14 @@ namespace academia{
                 if (throwexception)
                     throw NoViableSolutionFound("can\'t make schedule");
             }
-
+        }
+        //czy każdy nauczyciel ma wszystkie kursy obsadzone
+        for (const auto &teacherandhiscourses : teacher_courses_assignment) {
+            const int &teacher = teacherandhiscourses.first;
+            const std::vector<int> &courses = teacherandhiscourses.second;
+            Schedule ttt = out.OfTeacher(teacher);
+            if (ttt.Size()!=courses.size())
+                throw NoViableSolutionFound("");
         }
         return out;
     }
@@ -136,7 +143,7 @@ namespace academia{
                     return teacher;
             }
         }
-        //nie znalazlem żadnego nauczyciela na żadną daną godzinę,
+         //nie znalazlem żadnego nauczyciela na żadną daną godzinę,
         return -1;
     }
 
