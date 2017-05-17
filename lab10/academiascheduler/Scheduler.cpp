@@ -48,10 +48,6 @@ namespace academia{
 
     }
 
-    bool Schedule::CheckTime(const int &in) const {
-        return std::any_of(schedule_.begin(), schedule_.end(), [&in](const SchedulingItem &in_item) { return in==in_item.TimeSlot();});
-    }
-
     const SchedulingItem &Schedule::operator[](const int &integer) const {
         return this->schedule_[integer];
     }
@@ -86,23 +82,44 @@ namespace academia{
                                                  //rok i wymagane kursy
                                                  const std::map<int, std::set<int>> &courses_of_year,
                                                  int n_time_slots) {
+        //algorytm do bani. Złe założenie: to każdy nauczyciel ma dostać robotę, a nie każdy kurs ma dostać nauczyciela
         Schedule out;
         //zapętlam wszystkie podane roczniki
         for (const auto &yearandcourse : courses_of_year) {
             //zapętlam kursy który ma miećć każdy z roczników
             int year = yearandcourse.first;
-            for (auto &&singlecourse : yearandcourse.second) {
-                //znajduje wolnego nauczyciela
-                int foundTeacher= FindFreeTeacher(singlecourse, teacher_courses_assignment, out);
-                //znajduje wolny pokój
-                int freeroom= FindFreeRoom(rooms);
-                out.InsertScheduleItem( SchedulingItem( singlecourse, foundTeacher, freeroom, n_time_slots, year ) );
+            for (auto &singlecourse : yearandcourse.second) {
+                bool throwexception=true;
+                //potrzebuje nauczyciela i salę wolną o tej samej godzinie
+                for (int trythishour = 1; trythishour <= n_time_slots; ++trythishour) {
+                    //w kolejnych iteracjach godzin trzeba sprawdzić czy kurs już jest w planie
+                    if (CourseIsArleadyInPlan(singlecourse, out))
+                        throwexception=false;
+                    else { //jesli kursu jeszcze w planie nie ma, przejdź do procedury
+                        //znajduje wolnego nauczyciela
+                        int foundTeacher = FindFreeTeacher(singlecourse, trythishour, n_time_slots,
+                                                           teacher_courses_assignment, out);
+                        if (foundTeacher != -1) { //czy znalazłem nauczyciela? -1 -nie znalazlem
+                            //znajduje wolny pokój
+                            int freeroom = FindFreeRoom(rooms, trythishour, out, n_time_slots);
+                            if (freeroom != -1) { //czy mam pokój? -1 nie mam
+                                out.InsertScheduleItem(
+                                        SchedulingItem(singlecourse, foundTeacher, freeroom, trythishour, year));
+                                throwexception = false;
+                            }
+                        }
+                    }
+                }//wypróbowałem wszytkie godziny dla kursu i czy się udało?
+                if (throwexception)
+                    throw NoViableSolutionFound("can\'t make schedule");
             }
 
         }
+        return out;
     }
 
-    int GreedyScheduler::FindFreeTeacher(const int course, const std::map<int, std::vector<int>> &map, const Schedule &out) {
+    int GreedyScheduler::FindFreeTeacher(const int course, const int &currenthour, const int &n_time_slots,
+                                             const std::map<int, std::vector<int>> &map, const Schedule &out) {
         for (const auto &teacherandcourses : map) {
             int teacher = teacherandcourses.first; //mam losowegoo nauczyciela
             //sprawdzam czy nauczyciel ma odpowiedni kurs w zestawie
@@ -110,19 +127,39 @@ namespace academia{
             bool canheteach= std::find(courses.begin(), courses.end(), course) != courses.end();
             if (canheteach) {
                 //sprawdzam czy nauczyyciel jest dostępny:
-//                auto teacher_plan=out.OfTeacher(teacher);
-//                std::set_intersection();
-                return teacher;
+                //pobieram plan nauczyciela
+                Schedule teacher_plan = out.OfTeacher(teacher);
+                //sprawdzam czy dana godzina już występuje
+                const std::vector<int> free_hours = teacher_plan.AvailableTimeSlots(n_time_slots);
+                bool teacherhasfreetime = std::find(free_hours.begin(), free_hours.end(), currenthour)!=free_hours.end();
+                if (teacherhasfreetime)
+                    return teacher;
             }
-            else {
-                throw NoViableSolutionFound("No teachers");
-            }
-
         }
+        //nie znalazlem żadnego nauczyciela na żadną daną godzinę,
+        return -1;
     }
 
-    int GreedyScheduler::FindFreeRoom(const std::vector<int> &vector) {
-        return 0;
+    int GreedyScheduler::FindFreeRoom(const std::vector<int> &rooms, const int &currenthour, const Schedule &out,
+                                          const int &n_time_slots) {
+        for (const auto & room: rooms) {
+            const Schedule singleroomschedule=out.OfRoom(room);
+            const std::vector<int> free_hours=singleroomschedule.AvailableTimeSlots(n_time_slots);
+            bool roomisfree=std::find(free_hours.begin(), free_hours.end(), currenthour)!=free_hours.end();
+            if (roomisfree)
+                return room;
+        }
+        return -1;
+    }
+
+    bool GreedyScheduler::CourseIsArleadyInPlan(const int &singlecourse, const Schedule &out) {
+        bool isinserted;
+        for (int i = 0; i < out.Size(); ++i) {
+            isinserted=out[i].CourseId()==singlecourse;
+            if(isinserted)
+                return true;
+        }
+        return false;
     }
 
     NoViableSolutionFound::NoViableSolutionFound(const string &__arg) : runtime_error(__arg) {}

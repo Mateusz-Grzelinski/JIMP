@@ -23,7 +23,6 @@ namespace academia {
         size_t Size() const;
         std::vector<int> AvailableTimeSlots(int n_time_slots) const;
         const SchedulingItem &operator[](const int &integer) const ;
-        bool CheckTime(const int &in) const;
     private:
         std::vector<SchedulingItem> schedule_;
 
@@ -59,14 +58,18 @@ namespace academia {
                                     const std::map<int, std::vector<int >> &teacher_courses_assignment,
                                     const std::map<int, std::set<int>> &courses_of_year, int n_time_slots) override;
 
-        int FindFreeTeacher(const int course, const std::map<int, std::vector<int>> &map, const Schedule &out);
+        int FindFreeTeacher(const int course, const int &thishour, const int &n_time_slots,
+                                    const std::map<int, std::vector<int>> &map, const Schedule &out);
 
-        int FindFreeRoom(const std::vector<int> &vector);
+        int FindFreeRoom(const std::vector<int> &vector, const int &currenthour, const Schedule &out,
+                                 const int &n_time_slots);
 
     private:
         //o tej godzinie tylu nauczycieli jest zajętych
         std::map<int, std::set<int>> occupied_hour_teachers_;
         std::map<int, std::set<int>> occupied_hour_rooms_;
+
+        bool CourseIsArleadyInPlan(const int &singlecourse, const Schedule &schedule);
     };
 
     class NoViableSolutionFound : public std::runtime_error{
