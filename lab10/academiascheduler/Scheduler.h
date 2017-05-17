@@ -6,11 +6,14 @@
 #define JIMP_EXERCISES_SCHEDULER_H
 #include <StudentRepository.h>
 #include <algorithm>
+#include <set>
+#include <vector>
+#include <map>
+#include <error.h>
+
 namespace academia {
     class SchedulingItem;
-    class Scheduler {
 
-    };
     class Schedule{
     public:
         Schedule OfTeacher(int teacher_id) const;
@@ -41,6 +44,35 @@ namespace academia {
         int room_id_;
         int time_slot_;
         int year_;
+    };
+
+    class Scheduler {
+    public:
+        virtual Schedule PrepareNewSchedule(const std::vector<int> &rooms,
+                                    const std::map<int, std::vector<int >> &teacher_courses_assignment,
+                                    const std::map<int, std::set<int>> &courses_of_year, int n_time_slots)=0;
+    };
+
+    class GreedyScheduler:public Scheduler{
+    public:
+        Schedule PrepareNewSchedule(const std::vector<int> &rooms,
+                                    const std::map<int, std::vector<int >> &teacher_courses_assignment,
+                                    const std::map<int, std::set<int>> &courses_of_year, int n_time_slots) override;
+
+        int FindFreeTeacher(const int course, const std::map<int, std::vector<int>> &map, const Schedule &out);
+
+        int FindFreeRoom(const std::vector<int> &vector);
+
+    private:
+        //o tej godzinie tylu nauczycieli jest zajętych
+        std::map<int, std::set<int>> occupied_hour_teachers_;
+        std::map<int, std::set<int>> occupied_hour_rooms_;
+    };
+
+    class NoViableSolutionFound : public std::runtime_error{
+    public:
+        NoViableSolutionFound(const string &__arg);
+
     };
 
 }

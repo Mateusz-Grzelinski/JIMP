@@ -79,4 +79,51 @@ namespace academia{
     int SchedulingItem::Year() const {
         return year_;
     }
+
+    Schedule GreedyScheduler::PrepareNewSchedule(const std::vector<int> &rooms,
+                                                 //nauczyciel i jego kursy
+                                                 const std::map<int, std::vector<int >> &teacher_courses_assignment,
+                                                 //rok i wymagane kursy
+                                                 const std::map<int, std::set<int>> &courses_of_year,
+                                                 int n_time_slots) {
+        Schedule out;
+        //zapętlam wszystkie podane roczniki
+        for (const auto &yearandcourse : courses_of_year) {
+            //zapętlam kursy który ma miećć każdy z roczników
+            int year = yearandcourse.first;
+            for (auto &&singlecourse : yearandcourse.second) {
+                //znajduje wolnego nauczyciela
+                int foundTeacher= FindFreeTeacher(singlecourse, teacher_courses_assignment, out);
+                //znajduje wolny pokój
+                int freeroom= FindFreeRoom(rooms);
+                out.InsertScheduleItem( SchedulingItem( singlecourse, foundTeacher, freeroom, n_time_slots, year ) );
+            }
+
+        }
+    }
+
+    int GreedyScheduler::FindFreeTeacher(const int course, const std::map<int, std::vector<int>> &map, const Schedule &out) {
+        for (const auto &teacherandcourses : map) {
+            int teacher = teacherandcourses.first; //mam losowegoo nauczyciela
+            //sprawdzam czy nauczyciel ma odpowiedni kurs w zestawie
+            const std::vector<int> &courses = teacherandcourses.second;
+            bool canheteach= std::find(courses.begin(), courses.end(), course) != courses.end();
+            if (canheteach) {
+                //sprawdzam czy nauczyyciel jest dostępny:
+//                auto teacher_plan=out.OfTeacher(teacher);
+//                std::set_intersection();
+                return teacher;
+            }
+            else {
+                throw NoViableSolutionFound("No teachers");
+            }
+
+        }
+    }
+
+    int GreedyScheduler::FindFreeRoom(const std::vector<int> &vector) {
+        return 0;
+    }
+
+    NoViableSolutionFound::NoViableSolutionFound(const string &__arg) : runtime_error(__arg) {}
 }
