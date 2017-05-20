@@ -29,6 +29,13 @@ namespace academia{
         return out;
     }
 
+    Schedule Schedule::OfCourse(int course) const {
+        Schedule out;
+        std::copy_if(schedule_.begin(), schedule_.end(), std::back_inserter(out.schedule_),
+                     [course](const SchedulingItem &compare){ return compare.CourseId()==course;});
+        return out;
+    }
+
     SchedulingItem::SchedulingItem(int course_id_, int teacer_id_, int room_id_, int time_slot_, int year_)
             : course_id_(course_id_), teacer_id_(teacer_id_), room_id_(room_id_), time_slot_(time_slot_),
               year_(year_) {}
@@ -77,4 +84,62 @@ namespace academia{
     }
 
     NoViableSolutionFound::NoViableSolutionFound(const string &__arg) : runtime_error(__arg) {}
+
+
+    Schedule GreedyScheduler::PrepareNewSchedule(const std::vector<int> &rooms,
+                                                 const std::map<int, std::vector<int>> &teacher_courses_assignment,
+                                                 const std::map<int, std::set<int>> &courses_of_year,
+                                                 int n_time_slots) {
+        Schedule result;
+        bool addedRoomTime{};
+        bool Unaviable[rooms.size()][n_time_slots]{};
+        std::vector <int> freeTimes;
+
+        //ADDING TEACHERS AND COURSES
+        for(auto teacher : teacher_courses_assignment) {
+            for(auto course : teacher.second) {
+                result.InsertScheduleItem(SchedulingItem(course,teacher.first,0,0,0));
+            }
+        }
+
+
+
+        for(auto &item : result.schedule_) {
+            for (auto year : courses_of_year) {
+                for (auto course : year.second) {
+                    if (item.CourseId() == course) item.year_ = year.first;
+                }
+            }
+        }
+
+        for(auto &i : result.schedule_) {
+            Interscetion(n_time_slots, result, freeTimes, i, addedRoomTime);
+            for(int room = 0;room<rooms.size() ; ++room){
+                for(auto time : freeTimes){
+                    if (!Unaviable[room][time] && !addedRoomTime){
+                        SetValues(i, room, time, rooms, addedRoomTime);
+                        Unaviable[room][time]=true;
+                    }
+                }
+            }
+            if (!addedRoomTime) throw NoViableSolutionFound{"error"};
+        }
+        return result;
+    }
+
+    void GreedyScheduler::SetValues(SchedulingItem &i, int room, int time, const std::vector<int> &rooms, bool &addedRoomTime) const {
+        i.room_id_ = rooms[room];
+        i.time_slot_ = time;
+        addedRoomTime=true;
+    }
+
+    void GreedyScheduler::Interscetion(int n_time_slots, const Schedule &result, std::vector<int> &freeTimes,
+                                       const SchedulingItem &i, bool &addedRoomTime) const {
+        freeTimes.clear();
+        std::vector<int> freeTimesTeacher = result.OfTeacher(i.TeacherId()).AvailableTimeSlots(n_time_slots);
+        std::vector<int> freeTimesCourse = result.OfCourse(i.CourseId()).AvailableTimeSlots(n_time_slots);
+        set_intersection(freeTimesTeacher.begin(), freeTimesTeacher.end(),
+                         freeTimesCourse.begin(), freeTimesCourse.end(), back_inserter(freeTimes));
+        addedRoomTime=false;
+    }
 }

@@ -19,11 +19,12 @@ namespace academia {
         Schedule OfTeacher(int teacher_id) const;
         Schedule OfRoom(int room_id) const;
         Schedule OfYear(int year) const;
+        Schedule OfCourse(int course) const;
         void InsertScheduleItem(const SchedulingItem &item);
         size_t Size() const;
         std::vector<int> AvailableTimeSlots(int n_time_slots) const;
         const SchedulingItem &operator[](const int &integer) const ;
-    private:
+//    private:
         std::vector<SchedulingItem> schedule_;
 
     };
@@ -37,7 +38,7 @@ namespace academia {
         int TimeSlot() const;
         int Year() const;
 
-    private:
+//    protected:
         int course_id_;
         int teacer_id_;
         int room_id_;
@@ -58,18 +59,12 @@ namespace academia {
                                     const std::map<int, std::vector<int >> &teacher_courses_assignment,
                                     const std::map<int, std::set<int>> &courses_of_year, int n_time_slots) override;
 
-        int FindFreeTeacher(const int course, const int &thishour, const int &n_time_slots,
-                                    const std::map<int, std::vector<int>> &map, const Schedule &out);
-
-        int FindFreeRoom(const std::vector<int> &vector, const int &currenthour, const Schedule &out,
-                                 const int &n_time_slots);
 
     private:
-        //o tej godzinie tylu nauczycieli jest zajętych
-        std::map<int, std::set<int>> occupied_hour_teachers_;
-        std::map<int, std::set<int>> occupied_hour_rooms_;
+        void Interscetion(int n_time_slots, const Schedule &result, std::vector<int> &freeTimes, const SchedulingItem &i,
+                      bool &addedRoomTime) const;
 
-        bool CourseIsArleadyInPlan(const int &singlecourse, const Schedule &schedule);
+        void SetValues(SchedulingItem &i, int room, int time, const std::vector<int> &rooms, bool &addedRoomTime) const;
     };
 
     class NoViableSolutionFound : public std::runtime_error{
