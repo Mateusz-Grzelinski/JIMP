@@ -24,7 +24,7 @@ namespace academia {
         size_t Size() const;
         std::vector<int> AvailableTimeSlots(int n_time_slots) const;
         const SchedulingItem &operator[](const int &integer) const ;
-//    private:
+
         std::vector<SchedulingItem> schedule_;
 
     };
@@ -38,7 +38,6 @@ namespace academia {
         int TimeSlot() const;
         int Year() const;
 
-//    protected:
         int course_id_;
         int teacer_id_;
         int room_id_;
@@ -59,12 +58,6 @@ namespace academia {
                                     const std::map<int, std::vector<int >> &teacher_courses_assignment,
                                     const std::map<int, std::set<int>> &courses_of_year, int n_time_slots) override;
 
-
-    private:
-        void Interscetion(int n_time_slots, const Schedule &result, std::vector<int> &freeTimes, const SchedulingItem &i,
-                      bool &addedRoomTime) const;
-
-        void SetValues(SchedulingItem &i, int room, int time, const std::vector<int> &rooms, bool &addedRoomTime) const;
     };
 
     class NoViableSolutionFound : public std::runtime_error{
