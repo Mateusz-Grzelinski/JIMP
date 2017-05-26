@@ -92,13 +92,13 @@ namespace academia{
                                                  int n_time_slots) {
         Schedule result;
         bool throwerror = false;
-        bool Unaviable[rooms.size()][n_time_slots]{};
-        std::vector <int> freeTimes;
+        bool unav[rooms.size()][n_time_slots]{};
+        std::vector <int> totalyfree;
         
-        for(auto teacher : teacher_courses_assignment) {
-            std::vector<int> &assigment = teacher.second;
+        for(auto teach : teacher_courses_assignment) {
+            std::vector<int> &assigment = teach.second;
             for(const auto &course : assigment) {
-                result.InsertScheduleItem(SchedulingItem(course,teacher.first,0,0,0));
+                result.InsertScheduleItem(SchedulingItem(course,teach.first,0,0,0));
             }
         }
 
@@ -111,19 +111,19 @@ namespace academia{
         }
 
         for(auto &i : result.schedule_) {
-            freeTimes.clear();
+            totalyfree.clear();
             std::vector<int> avaliableteachers = result.OfTeacher(i.TeacherId()).AvailableTimeSlots(n_time_slots);
             std::vector<int> avaliableCourses = result.OfCourse(i.CourseId()).AvailableTimeSlots(n_time_slots);
             set_intersection(avaliableteachers.begin(), avaliableteachers.end(),
-                             avaliableCourses.begin(), avaliableCourses.end(), back_inserter(freeTimes));
+                             avaliableCourses.begin(), avaliableCourses.end(), back_inserter(totalyfree));
             throwerror=false;
             for(int room = 0;room<rooms.size() ; ++room){
-                for(auto time : freeTimes){
-                    if (!Unaviable[room][time] && !throwerror){
+                for(auto time : totalyfree){
+                    if (!unav[room][time] && !throwerror){
                         i.room_id_ = rooms[room];
                         i.time_slot_ = time;
                         throwerror=true;
-                        Unaviable[room][time]=true;
+                        unav[room][time]=true;
                     }
                 }
             }
