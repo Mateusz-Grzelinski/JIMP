@@ -2,7 +2,7 @@
 // Created by mat on 25.05.17.
 //
 
-#include "BinaryTree.h"
+#include "Tree.h"
 #include <vector>
 #include <iostream>
 
@@ -13,14 +13,12 @@ int main(){
 //    działą:
     BinaryTree<int> first;
 //    co to jest:
-//    BinaryTree<int> first(); // dlaczego nie mogę na first operować?
+//    BinaryTree<int> firsta(); // dlaczego nie mogę na first operować?
 
 //    to działą:
-    Node<int> nodzik(5);
-    Node<int>(8);
-
-//    dziwny bład:
-    std::make_unique(Node<int>(5));
+//    Node<int> nodzik(5);
+//    Node<int>(8);
+//    std::make_unique<Node<int>>(9);
 
 
     return 0;

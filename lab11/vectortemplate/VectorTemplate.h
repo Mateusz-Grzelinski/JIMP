@@ -118,7 +118,7 @@ void MyVector<T>::Destroy() {
 }
 
 template<class T>
-void MyVector<T>::Reserve(size_t size) {
+void MyVector<T>:: Reserve(size_t size) {
     elements_ = new T[size];
     capacity_ = size;
     size_ = 0;

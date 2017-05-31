@@ -7,6 +7,7 @@
 #ifndef JIMP_EXERCISES_BINARYTREE_H
 #define JIMP_EXERCISES_BINARYTREE_H
 #include <memory>
+#include <iostream>
 
 namespace tree {
 //  Node
@@ -15,7 +16,7 @@ namespace tree {
     class Node{
     public:
         Node(T in);
-
+        bool visited_;
         std::unique_ptr<Node<T>> left_;
         std::unique_ptr<Node<T>> right_;
         T value_;
@@ -23,6 +24,7 @@ namespace tree {
 
     template<class T>
     Node<T>::Node(T in) {
+        visited_ = false;
         left_= nullptr;
         right_= nullptr;
         value_ = in;
@@ -34,19 +36,19 @@ namespace tree {
     template<class T>
     class BinaryTree {
     public:
+        friend Node;
         BinaryTree();
         BinaryTree(T in);
 
         void Insert(T in);
         std::size_t Size() const ;
-        T Find(const T &search, const std::unique_ptr<Node<T>> &root ) ;
+        bool Find(const T &search, const std::unique_ptr<Node<T>> &root = head_) ;
         T Remove(const T &search);
-        void Print() const;
+        void Print(std::unique_ptr<Node<T>> root=head_) const;
 
     private:
         std::unique_ptr<Node<T>> head_;
         std::size_t size_;
-
     };
 
 
@@ -59,7 +61,7 @@ namespace tree {
 
     template<class T>
     BinaryTree<T>::BinaryTree(T in) {
-        head_ = std::make_unique(Node<T>(in));
+        head_ = std::make_unique<Node<T>>(in);
         size_ = 1;
     }
 
@@ -67,7 +69,7 @@ namespace tree {
     void BinaryTree<T>::Insert(T in) {
 //        Node *tmp = head_.get(); //sposob przechodzenia
         if (head_== nullptr){
-            head_ = std::make_unique(Node<T>(in));
+            head_ = std::make_unique<Node<T>>(in);
             ++size_;
         }
         else {
@@ -81,7 +83,7 @@ namespace tree {
                 if (pivot == nullptr)
                     go = false;
             }
-            pivot = std::make_unique(Node<T>(in));
+            pivot = std::make_unique<Node<T>>(in);
         }
     }
 
@@ -91,28 +93,33 @@ namespace tree {
     }
 
     template<class T>
-    T BinaryTree<T>::Find(const T &search, const std::unique_ptr<Node<T>> &root ) {
-//        if (root == nullptr)
-//            auto &pivot = head_;
-//        else
-//            auto &pivot = root;
-//        while( pivot->value_ != search ){
-//
-//        }
-        return nullptr;
+    bool BinaryTree<T>::Find(const T &search, const std::unique_ptr<Node<T>> &root ) {
+
+        if (&root== nullptr)
+            return false;
+        if (&root->value_==search)
+            return true;
+        if (&root->value_ < search)
+            return this->Find(search, &root->left_);
+        else
+            return this->Find(search, &root->right_);
     }
 
     template<class T>
     T BinaryTree<T>::Remove(const T &search) {
-
+        //not implemented
 
         --size_;
         return nullptr;
     }
 
     template<class T>
-    void BinaryTree<T>::Print() const {
-
+    void BinaryTree<T>::Print(std::unique_ptr<Node<T>> root) const {
+        std::cout<<root->value_;
+        if(root->left_!= nullptr)
+            Print(root->left_);
+        if(root->right_!= nullptr)
+            Print(root->right_);
     }
 }
 #endif //JIMP_EXERCISES_BINARYTREE_H
