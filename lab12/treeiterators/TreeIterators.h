@@ -48,17 +48,18 @@ namespace tree {
     public:
         InOrderTreeView(Tree<T> *tree) :  InOrderTreeIterator<T>(tree->Root()), tree_(tree) {}
 
-        InOrderTreeIterator<T> begin() /*return generatedvalues_.end();*/{ /*return generatedvalues_.begin();*/ }
+//        zmienna generatevalues nie jest widoczna pomimo dziedziczenia, dlaczego?
+        InOrderTreeIterator<T> begin() { /*return generatedvalues_.begin();*/ }
         InOrderTreeIterator<T> end()  {  /*return generatedvalues_.end();*/ }
 
     private:
         Tree<T> *tree_;
     };
 
-
-    template <class T>
-    class InOrder{
-
+    //funkcja jako zwykły wrapper. Treaz nie trzeba pisać <typ>, kiedy wołasz klasę
+    template <typename T>
+    InOrderTreeView<T> InOrder(Tree<T> *tree){
+        return InOrderTreeView<T>(tree);
     };
 
 }

@@ -3,3 +3,5 @@
 //
 
 #include "TreeIterators.h"
+
+//tree::InOrder::InOrder(tree::Tree<T> *tree) : InOrderTreeView(tree) {}

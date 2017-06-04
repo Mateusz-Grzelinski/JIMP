@@ -6,6 +6,8 @@
 #include <gtest/gtest.h>
 #include <MemLeakTest.h>
 #include "TreeIterators.h"
+#include "../../lab12/treeiterators/TreeIterators.h"
+#include "../../lab12/tree/Tree.h"
 
 using ::std::vector;
 
@@ -16,16 +18,16 @@ using ::tree::InOrderTreeView;
 
 class TreeInorderTest : public ::testing::Test, MemLeakTest {
  public:
-  TreeInorderTest() : ::testing::Test(), MemLeakTest(), simple_tree(0) {
-    simple_tree.Insert(-20);
-    simple_tree.Insert(80);
-    simple_tree.Insert(10078);
-    simple_tree.Insert(98341);
-    simple_tree.Insert(198341);
-    simple_tree.Insert(-90);
-    simple_tree.Insert(-10);
-  }
-  Tree<int> simple_tree;
+    Tree<int> simple_tree;
+    TreeInorderTest() : ::testing::Test(), MemLeakTest(), simple_tree(0) {
+        simple_tree.Insert(-20);
+        simple_tree.Insert(80);
+        simple_tree.Insert(10078);
+        simple_tree.Insert(98341);
+        simple_tree.Insert(198341);
+        simple_tree.Insert(-90);
+        simple_tree.Insert(-10);
+    }
 };
 
 TEST_F(TreeInorderTest,CanCreateInOrderIterator) {
