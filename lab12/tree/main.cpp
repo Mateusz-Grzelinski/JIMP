@@ -11,9 +11,9 @@ using namespace tree;
 
 int main(){
 //    działą:
-    BinaryTree<int> first;
+    Tree<int> first;
 //    co to jest:
-//    BinaryTree<int> firsta(); // dlaczego nie mogę na first operować?
+//    Tree<int> firsta(); // dlaczego nie mogę na first operować?
 
 //    to działą:
 //    Node<int> nodzik(5);
