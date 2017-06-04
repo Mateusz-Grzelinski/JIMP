@@ -87,20 +87,23 @@ namespace tree {
             bool stop=false;
             while (!stop) {
                 if (pivot->value_ < in) {
+
+                    if (pivot->right_ == nullptr) {
+                        pivot->right_ = std::make_unique<Node<T>>(in);
+                        stop = true;
+                        ++size_;
+                    }
+                    pivot = pivot->right_.get();
+
+
+                }
+                else {
                     if (pivot->left_ == nullptr) {
                         pivot->left_ = std::make_unique<Node<T>>(in);
                         stop = true;
                         ++size_;
                     }
                     pivot = pivot->left_.get();
-                }
-                else {
-                    if (pivot->right_ == nullptr) {
-                        pivot->right_ = std::make_unique<Node<T>>(in);
-                        stop = true;
-                        ++size_;
-                    }
-                        pivot = pivot->right_.get();
                 }
             }
         }
