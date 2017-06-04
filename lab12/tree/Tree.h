@@ -40,6 +40,7 @@ namespace tree {
         Tree();
         Tree(T in);
 
+        Node<T> * Root();
         void Insert(T in);
         std::size_t Size() const ;
         std::size_t Depth() const ;
@@ -54,7 +55,10 @@ namespace tree {
         std::size_t size_;
     };
 
-
+    template <class T>
+    Node<T> *Tree<T>::Root() {
+        return head_.get();
+    }
 
     template<class T>
     Tree<T>::Tree() {
